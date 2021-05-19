@@ -9,22 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".MenuPrincipalEvento"></activity>
+        <activity android:name=".MenuAutorActivity"/>
+        <activity android:name=".MenuPrincipalEvento" />
         <activity android:name=".MenuPrincipalInventario" />
         <activity android:name=".MenuPrincipalPersonas" />
         <activity android:name=".MenuPrincipalDocumentos" />
         <activity android:name=".MenuPrincipalEquipoInformatico" />
-        <activity android:name=".AgregarAlumnoActivity"/>
+        <activity android:name=".AgregarAlumnoActivity" />
+        <activity android:name=".EditarAutorActivity" />
+        <activity android:name=".AgregarAutorActivity" />
         <activity android:name=".EditarAlumnoActivity" />
-        <activity android:name=".MenuAlumnoActivity"/>
+        <activity android:name=".MenuAlumnoActivity" />
         <activity android:name=".EditarDocenteActivity" />
         <activity android:name=".AgregarDocenteActivity" />
-        <activity android:name=".MenuDocenteActivity"/>
-
-
-
-
-
+        <activity android:name=".MenuDocenteActivity" />
         <activity android:name=".MenuPrincipalActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
