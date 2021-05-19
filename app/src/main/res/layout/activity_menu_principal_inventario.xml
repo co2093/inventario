@@ -36,10 +36,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuEquipo"
+                android:id="@+id/btnMenuControlFisico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Equipo Informatico" />
+                android:text="Control Fisico" />
         </TableRow>
 
 
@@ -49,10 +49,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuDocumentos"
+                android:id="@+id/btnMenuTraslados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documentos" />
+                android:text="Traslados" />
         </TableRow>
 
         <TableRow
@@ -60,10 +60,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuPersonas"
+                android:id="@+id/btnMenuSustitucion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Personas" />
+                android:text="Sustitucion" />
         </TableRow>
 
         <TableRow
@@ -71,10 +71,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuInventario"
+                android:id="@+id/btnMenuControlDescargo"
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Inventario" />
+                android:text="Descargo" />
         </TableRow>
 
         <TableRow
@@ -82,10 +82,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuEventos"
+                android:id="@+id/btnMenuPrestamos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eventos" />
+                android:text="Prestamos" />
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

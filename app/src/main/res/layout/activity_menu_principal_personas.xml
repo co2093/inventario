@@ -23,7 +23,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU  INVENTARIO"
+                android:text="MENU  PERSONAS"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +36,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuEquipo"
+                android:id="@+id/btnMenuAutores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Equipo Informatico" />
+                android:text="Autores" />
         </TableRow>
 
 
@@ -49,10 +49,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuDocumentos"
+                android:id="@+id/btnMenuDocentes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documentos" />
+                android:text="Docentes" />
         </TableRow>
 
         <TableRow
@@ -60,10 +60,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuPersonas"
+                android:id="@+id/btnMenuAlumnos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Personas" />
+                android:text="Alumnos" />
         </TableRow>
 
         <TableRow
@@ -71,21 +71,12 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuInventario"
+                android:id="@+id/btnMenuUsuarios"
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Inventario" />
+                android:text="Usuarios" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnMenuEventos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eventos" />
-        </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
