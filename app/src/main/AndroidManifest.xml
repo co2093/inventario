@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".MenuAutorActivity"/>
+        <activity android:name=".MenuRazonActivity"></activity>
+        <activity android:name=".MenuAutorActivity" />
+        <activity android:name=".EditarRazonActivity"/>
+        <activity android:name=".EnviarTrasladoActivity" />
         <activity android:name=".MenuPrincipalEvento" />
         <activity android:name=".MenuPrincipalInventario" />
         <activity android:name=".MenuPrincipalPersonas" />

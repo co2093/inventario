@@ -31,7 +31,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve1.s3db";
+        private static final String BASE_DATOS = "inve12.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -46,6 +46,11 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE docente(id INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE alumno (carnet VARCHAR(128) NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), correo VARCAHR (128), contrasena VARCHAR(128));");
+
+                //Damaris
+                db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
+                db.execSQL("CREATE TABLE libro (id_libro INTEGER NOT NULL PRIMARY KEY,nombre_documento VARCHAR (256) NOT NULL,isbn VARCHAR (13) NOT NULL,ejemplar INTEGER NOT NULL,id_editorial INTEGER NOT NULL, nombre_autor VARCHAR (256) NOT NULL );");
+
 
 
             }catch (SQLException e){
@@ -156,6 +161,124 @@ public class ControlDB {
 
         }
     }
+
+    public String insertar (Razon_Traslado razon_traslado){
+
+        String regInsertado = "Registro Insertados Numero = ";
+        long contador = 0;
+
+        ContentValues values = new ContentValues();
+        values.put("fecha", razon_traslado.getFecha_traslado());
+        values.put("nombre_razon", razon_traslado.getNombre_razon_traslado());
+        values.put("descripcion", razon_traslado.getDescripcion_razon_traslado());
+        values.put("equipo", razon_traslado.getEquipo_informatico());
+        values.put("estado", razon_traslado.getEstado());
+
+        contador = db.insert("razon", null, values);
+
+        if (contador==-1 || contador==0){
+            regInsertado = "ERROR";
+        }else {
+            regInsertado = regInsertado+contador;
+        }
+
+        return regInsertado;
+    }
+
+    public List<Razon_Traslado> getEveryoneRazon(){
+        List<Razon_Traslado> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM razon";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+                String nombre_razon = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                String equipo = cursor.getString(3);
+                String fecha = cursor.getString(4);
+                String estado = cursor.getString(5);
+
+                Razon_Traslado razon =  new Razon_Traslado(id, nombre_razon, descripcion, equipo, fecha, estado);
+                lista.add(razon);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Razon_Traslado> consultaRazon(int idd){
+        List<Razon_Traslado> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM razon WHERE id = "  + idd;
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int i   = cursor.getInt(0);
+                String nombre_razon = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                String equipo = cursor.getString(3);
+                String fecha = cursor.getString(4);
+                String estado = cursor.getString(5);
+
+                Razon_Traslado razon =  new Razon_Traslado(i, nombre_razon, descripcion, equipo, fecha, estado);
+                lista.add(razon);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
+    public boolean eliminar(Razon_Traslado razon){
+
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM razon WHERE id = " + razon.getId_razon_traslado();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+    public String actualizar(Razon_Traslado razon) {
+
+
+        String[] id = {String.valueOf(razon.getId_razon_traslado())};
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nombre_razon", razon.getNombre_razon_traslado());
+        contentValues.put("descripcion", razon.getDescripcion_razon_traslado());
+        contentValues.put("equipo", razon.getEquipo_informatico());
+        contentValues.put("fecha", razon.getFecha_traslado());
+        contentValues.put("estado", razon.getEstado());
+
+        db.update("razon", contentValues, "id = ?", id);
+
+        return "Actualizado";
+
+    }
+
+
 
 
 
