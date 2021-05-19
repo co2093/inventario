@@ -14,6 +14,17 @@
         <activity android:name=".MenuPrincipalPersonas" />
         <activity android:name=".MenuPrincipalDocumentos" />
         <activity android:name=".MenuPrincipalEquipoInformatico" />
+        <activity android:name=".AgregarAlumnoActivity"/>
+        <activity android:name=".EditarAlumnoActivity" />
+        <activity android:name=".MenuAlumnoActivity"/>
+        <activity android:name=".EditarDocenteActivity" />
+        <activity android:name=".AgregarDocenteActivity" />
+        <activity android:name=".MenuDocenteActivity"/>
+
+
+
+
+
         <activity android:name=".MenuPrincipalActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
