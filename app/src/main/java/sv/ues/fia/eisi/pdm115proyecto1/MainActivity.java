@@ -33,13 +33,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(helper.inicio(editTextUsuario.getText().toString(), editTextContrasena.getText().toString())){
 
-                    Intent intent = new Intent(v.getContext(), MainActivity2.class);
+                    Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
                     startActivityForResult(intent,0);
                 }else{
                     Toast.makeText(MainActivity.this, "Usuario no existe", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        //Usuario de prueba
+        helper.llenarUsuario();
 
 
 
