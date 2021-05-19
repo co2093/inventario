@@ -31,7 +31,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve12.s3db";
+        private static final String BASE_DATOS = "inve123.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -51,6 +51,8 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
                 db.execSQL("CREATE TABLE libro (id_libro INTEGER NOT NULL PRIMARY KEY,nombre_documento VARCHAR (256) NOT NULL,isbn VARCHAR (13) NOT NULL,ejemplar INTEGER NOT NULL,id_editorial INTEGER NOT NULL, nombre_autor VARCHAR (256) NOT NULL );");
 
+                //Francisco
+                db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
 
 
             }catch (SQLException e){
@@ -184,6 +186,96 @@ public class ControlDB {
 
         return regInsertado;
     }
+
+    public String insertar(Categoria categoria){
+
+        if(verificarIntegridad(categoria,4)){
+            return "Ya existe una categoria con ese ID";
+        }else{
+            String regInsertados="Registro Insertado Nº= ";
+            long contador=0;
+
+            ContentValues cat = new ContentValues();
+            //cat.put("id_categoria", categoria.getId_categoria());
+            cat.put("nombre_categoria", categoria.getNombre_categoria());
+            contador=db.insert("categoria",null, cat);
+
+            if(contador==-1 || contador ==0){
+                regInsertados = "Error al insertar el registro";
+            }else{
+                regInsertados=regInsertados+contador;
+            }
+            return regInsertados;
+        }
+    }
+
+    public boolean eliminar(Categoria categoria){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM categoria WHERE id_categoria = " + categoria.getId_categoria();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public List<Categoria> consultaCategoria(String id_categoria){
+        List<Categoria> lista = new ArrayList<>();
+
+        // String queryString = "SELECT * FROM categoria WHERE id_categoria = " + id_categoria ;
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        //Cursor cursor = db.rawQuery(queryString, null);
+
+        String queryString = "SELECT * FROM categoria WHERE id_categoria = " + id_categoria;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+
+                Categoria cat =  new Categoria(id, nombre);
+                lista.add(cat);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
+    public List<Categoria> getCategorias(){
+        List<Categoria> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM categoria";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            do{
+                int id_categoria = cursor.getInt(0);
+                String nombre_categoria = cursor.getString(1);
+                Categoria categoria = new Categoria(id_categoria,nombre_categoria);
+                lista.add(categoria);
+            }while (cursor.moveToNext());
+        }else{
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+
+
+
+
+
 
     public List<Razon_Traslado> getEveryoneRazon(){
         List<Razon_Traslado> lista = new ArrayList<>();
@@ -601,6 +693,19 @@ public class ControlDB {
                     return false;
                 }
 
+
+            }
+
+            case 4:{
+                Categoria categoria = (Categoria) dato;
+                String []id = {String.valueOf(categoria.getId_categoria())};
+                abrir();
+                Cursor cursor = db.query("categoria",null,"id_categoria =?",id,null,null,null);
+                if (cursor.moveToFirst()){
+                    return true;
+                }else{
+                    return false;
+                }
 
             }
 
