@@ -16,7 +16,7 @@ public class AgregarLibro extends AppCompatActivity {
 
     ImageButton btnAgregar, btnRegresar;
     ControlDB helper;
-    EditText editTextIsbn, editTextNombre, editTextEjemplar, editTextEditorial;
+    EditText editTextIsbn, editTextNombre, editTextEjemplar, editTextEditorial, editTextIdiomaLibro;
     Spinner spinnerAutores;
     ArrayAdapter libroArrayAdapter;
 
@@ -33,6 +33,7 @@ public class AgregarLibro extends AppCompatActivity {
         spinnerAutores = findViewById(R.id.spinnerAutoresLibro);
         editTextEjemplar = findViewById(R.id.editTextAutorEjemplar);
         editTextEditorial = findViewById(R.id.editTextEditorial);
+        editTextIdiomaLibro = findViewById(R.id.editTextIdiomaLibro);
 
         llenarSpinner(helper);
 
@@ -49,7 +50,7 @@ public class AgregarLibro extends AppCompatActivity {
     public void insertarLibro(View view){
 
 
-        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextEjemplar.getText().toString().isEmpty() || editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
+        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextEjemplar.getText().toString().isEmpty() || editTextIdiomaLibro.getText().toString().isEmpty() ||editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
             Toast.makeText(AgregarLibro.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
         }else {
 
@@ -58,7 +59,7 @@ public class AgregarLibro extends AppCompatActivity {
             Integer autor = Integer.valueOf(spinnerAutores.getSelectedItem().toString());
             Integer ejemplar = Integer.valueOf(editTextEjemplar.getText().toString());
             String editorial = editTextEditorial.getText().toString();
-
+            String idioma = editTextIdiomaLibro.getText().toString();
             String regInsertados;
 
             Libro libro = new Libro();
@@ -67,6 +68,7 @@ public class AgregarLibro extends AppCompatActivity {
             libro.setAutorId(autor);
             libro.setEjemplar(ejemplar);
             libro.setEditorial(editorial);
+            libro.setIdioma(idioma);
 
             helper.abrir();
             regInsertados = helper.insertar(libro);

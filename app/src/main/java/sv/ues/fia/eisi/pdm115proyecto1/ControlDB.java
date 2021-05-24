@@ -31,7 +31,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inventario1234.s3db";
+        private static final String BASE_DATOS = "inventario12345.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -49,7 +49,7 @@ public class ControlDB {
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
-                db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128));");
+                db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
                 db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256),titulo_tesis VARCHAR (256),fecha_publicacion VARCHAR(128),id_idioma INTEGER,id_autor_tesis INTEGER);");
 
                 //Francisco
@@ -88,6 +88,7 @@ public class ControlDB {
             contentValues.put("autor", libro.getAutorId());
             contentValues.put("ejemplar", libro.getEjemplar());
             contentValues.put("editorial", libro.getEditorial());
+            contentValues.put("idioma", libro.getIdioma());
 
             db.insert("libro", null, contentValues);
 
@@ -407,7 +408,8 @@ public class ControlDB {
                 int autor = cursor.getInt(2);
                 int ejemplar = cursor.getInt(3);
                 String editorial = cursor.getString(4);
-                Libro libro = new Libro(isbn,nombreLibro,autor,ejemplar,editorial);
+                String idioma = cursor.getString(5);
+                Libro libro = new Libro(isbn,nombreLibro,autor,ejemplar,editorial, idioma);
                 lista.add(libro);
             }while (cursor.moveToNext());
         }else {
@@ -528,7 +530,8 @@ public class ControlDB {
                 int autor = cursor.getInt(2);
                 int ejemplar = cursor.getInt(3);
                 String editorial = cursor.getString(4);
-                Libro libro = new Libro(isbn2,nombreLibro,autor,ejemplar,editorial);
+                String idioma = cursor.getString(5);
+                Libro libro = new Libro(isbn2,nombreLibro,autor,ejemplar,editorial, idioma);
                 lista.add(libro);
             }while (cursor.moveToNext());
         }else {
@@ -696,6 +699,7 @@ public class ControlDB {
             contentValues.put("autor", libro.getAutorId());
             contentValues.put("ejemplar", libro.getEjemplar());
             contentValues.put("editorial", libro.getEditorial());
+            contentValues.put("idioma", libro.getIdioma());
 
             db.update("libro", contentValues, "isbn = ?", id);
 

@@ -7,16 +7,26 @@ public class Libro {
     private int autorId;
     private int ejemplar;
     private String editorial;
+    private String idioma;
 
     public Libro() {
     }
 
-    public Libro(int isbn, String nombreLibro, int autorId, int ejemplar, String editorial) {
+    public Libro(int isbn, String nombreLibro, int autorId, int ejemplar, String editorial, String idioma) {
         this.isbn = isbn;
         this.nombreLibro = nombreLibro;
         this.autorId = autorId;
         this.ejemplar = ejemplar;
         this.editorial = editorial;
+        this.idioma = idioma;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
     }
 
     public int getIsbn() {
