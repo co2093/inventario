@@ -49,8 +49,8 @@ public class ControlDB {
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
+                db.execSQL("CREATE TABLE libro (id_libro INTEGER NOT NULL PRIMARY KEY,nombre_documento VARCHAR (256) NOT NULL,isbn VARCHAR (13) NOT NULL,ejemplar INTEGER NOT NULL,id_editorial INTEGER NOT NULL, nombre_autor VARCHAR (256) NOT NULL );");
 
-                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256),titulo_tesis VARCHAR (256),fecha_publicacion VARCHAR(128),id_idioma INTEGER,id_autor_tesis INTEGER);");
                 //Francisco
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
 
