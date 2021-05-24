@@ -31,7 +31,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve123.s3db";
+        private static final String BASE_DATOS = "inventario1234.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -49,7 +49,7 @@ public class ControlDB {
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
-                db.execSQL("CREATE TABLE libro (id_libro INTEGER NOT NULL PRIMARY KEY,nombre_documento VARCHAR (256) NOT NULL,isbn VARCHAR (13) NOT NULL,ejemplar INTEGER NOT NULL,id_editorial INTEGER NOT NULL, nombre_autor VARCHAR (256) NOT NULL );");
+                db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128));");
 
                 //Francisco
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
@@ -73,6 +73,27 @@ public class ControlDB {
 
     public void cerrar(){
         DBHelper.close();
+    }
+
+    public String insertar(Libro libro){
+
+        if(verificarIntegridad(libro, 5)){
+            return "Ya existe un libro con este ISBN";
+        }else{
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("isbn", libro.getIsbn());
+            contentValues.put("nombre_libro", libro.getNombreLibro());
+            contentValues.put("autor", libro.getAutorId());
+            contentValues.put("ejemplar", libro.getEjemplar());
+            contentValues.put("editorial", libro.getEditorial());
+
+            db.insert("libro", null, contentValues);
+
+            return "Libro agregado";
+        }
+
+
     }
 
     public String insertar(Usuario usuario){
@@ -370,7 +391,31 @@ public class ControlDB {
 
     }
 
+    public List<Libro> getLibros(){
 
+        List<Libro> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM libro";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int isbn = cursor.getInt(0);
+                String nombreLibro = cursor.getString(1);
+                int autor = cursor.getInt(2);
+                int ejemplar = cursor.getInt(3);
+                String editorial = cursor.getString(4);
+                Libro libro = new Libro(isbn,nombreLibro,autor,ejemplar,editorial);
+                lista.add(libro);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
 
 
 
@@ -442,6 +487,57 @@ public class ControlDB {
         cursor.close();
         db.close();
         return lista;
+    }
+
+    public List<Integer> getAutoresID(){
+        List<Integer> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM autor";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Libro> consultaLibro(int isbn){
+        List<Libro> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM libro WHERE isbn = " + isbn;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int isbn2 = cursor.getInt(0);
+                String nombreLibro = cursor.getString(1);
+                int autor = cursor.getInt(2);
+                int ejemplar = cursor.getInt(3);
+                String editorial = cursor.getString(4);
+                Libro libro = new Libro(isbn2,nombreLibro,autor,ejemplar,editorial);
+                lista.add(libro);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+
     }
 
     public List<Autor> consulta(int idd){
@@ -537,6 +633,17 @@ public class ControlDB {
     }
 
 
+    public boolean eliminar(Libro libro){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM libro WHERE isbn =" + libro.getIsbn();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     public boolean eliminar(Autor autor){
 
@@ -575,6 +682,28 @@ public class ControlDB {
         }else {
             return false;
         }
+    }
+
+    public String actualizar(Libro libro){
+
+        if (verificarIntegridad(libro, 5)){
+            String[] id = {String.valueOf(libro.getIsbn())};
+            ContentValues contentValues = new ContentValues();
+
+
+            contentValues.put("nombre_libro", libro.getNombreLibro());
+            contentValues.put("autor", libro.getAutorId());
+            contentValues.put("ejemplar", libro.getEjemplar());
+            contentValues.put("editorial", libro.getEditorial());
+
+            db.update("libro", contentValues, "isbn = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
     }
 
     public String actualizar(Autor autor) {
@@ -706,6 +835,22 @@ public class ControlDB {
                 }else{
                     return false;
                 }
+
+            }
+
+            case 5:
+            {
+                Libro libro = (Libro) dato;
+                String [] id = {String.valueOf(libro.getIsbn())};
+                abrir();
+                Cursor cursor = db.query("libro", null, "isbn = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
 
             }
 
