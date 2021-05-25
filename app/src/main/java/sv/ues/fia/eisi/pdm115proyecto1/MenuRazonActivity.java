@@ -26,7 +26,7 @@ public class MenuRazonActivity extends AppCompatActivity {
 
     EditText editNombreRazonTraslado;
     GridView gridView;
-    ImageButton btnAgregar, btnEditar, btnRegresar, btnBorrar;
+    ImageButton btnAgregar, btnEditar, btnRegresar, regresarInicio;
     ListView listadoRazon;
     ControlDB DBhelper;
     ArrayAdapter razonArrayAdapter;
@@ -48,6 +48,7 @@ public class MenuRazonActivity extends AppCompatActivity {
         btnRegresar = findViewById(R.id.btnRegresar);
         listadoRazon = findViewById(R.id.listado_razon);
         editBusqueda = findViewById(R.id.editBuscar);
+        regresarInicio = findViewById(R.id.imageButtonMenuInicio);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,15 @@ public class MenuRazonActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
+
+        regresarInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

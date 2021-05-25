@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ControlDB {
 
-   // private static final String [] camposUsuario = new String[] {"id, nombre, correo, contrasena"};
+   private static final String [] camposUsuario = new String[] {"nombre, contrasena, correo, rol"};
    private static final String [] camposAutor = new String[] {"id", "nombre"};
    private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
 
@@ -31,7 +31,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inventario12345.s3db";
+        private static final String BASE_DATOS = "inv_4.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -45,7 +45,8 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE autor(id INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR (128));");
                 db.execSQL("CREATE TABLE docente(id INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE alumno (carnet VARCHAR(128) NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
-                db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), correo VARCAHR (128), contrasena VARCHAR(128));");
+                db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), contrasena VARCAHR (128), correo VARCHAR(128), rol VARCHAR(128));");
+                db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
@@ -76,6 +77,16 @@ public class ControlDB {
         DBHelper.close();
     }
 
+    public String insertar(Rol rol){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", rol.getIdRol());
+        contentValues.put("nombre", rol.getNombreRol());
+        db.insert("rol", null, contentValues);
+
+        return "Rol agregado";
+    }
+
     public String insertar(Libro libro){
 
         if(verificarIntegridad(libro, 5)){
@@ -99,12 +110,19 @@ public class ControlDB {
     }
 
     public String insertar(Usuario usuario){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("nombre", usuario.getNombre());
-        contentValues.put("correo", usuario.getCorreo());
-        contentValues.put("contrasena", usuario.getContrasena());
-        db.insert("usuario", null, contentValues);
-        return "OK";
+
+        if (verificarIntegridad(usuario, 6)){
+            return "Ya existe un usuario con este correo";
+        }else {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre", usuario.getNombre());
+            contentValues.put("correo", usuario.getCorreo());
+            contentValues.put("contrasena", usuario.getContrasena());
+            contentValues.put("rol", usuario.getRol());
+            db.insert("usuario", null, contentValues);
+            return "OK";
+        }
     }
 
     public String insertar (Autor autor){
@@ -465,6 +483,31 @@ public class ControlDB {
         return lista;
     }
 
+    public List<Usuario> getUsuarios(){
+        List<Usuario> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM usuario";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            do{
+                String nombre = cursor.getString(1);
+                String contrasena = cursor.getString(2);
+                String correo = cursor.getString(3);
+                String rol = cursor.getString(4);
+
+                Usuario usuario = new Usuario(nombre, contrasena, correo, rol);
+
+
+                lista.add(usuario);
+            }while (cursor.moveToNext());
+        }else{
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
     public List<Autor> getEveryone(){
         List<Autor> lista = new ArrayList<>();
 
@@ -515,6 +558,33 @@ public class ControlDB {
         cursor.close();
         db.close();
         return lista;
+    }
+
+    public List<String> getRoles(){
+
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM rol";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String rol = cursor.getString(1);
+
+                lista.add(rol);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
     }
 
     public List<Libro> consultaLibro(int isbn){
@@ -636,6 +706,45 @@ public class ControlDB {
 
     }
 
+    public List<Usuario> consultaUsuario(String correo){
+        List<Usuario> lista = new ArrayList<>();
+
+        // String queryString = "SELECT * FROM alumno WHERE carnet = " + carnet ;
+
+
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        //Cursor cursor = db.rawQuery(queryString, null);
+
+        String[] carnetd = {correo};
+
+        Cursor cursor = db.query("usuario", camposUsuario, "correo = ?", carnetd, null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+
+                String nombre = cursor.getString(0);
+                String contrasena = cursor.getString(1);
+                String correo2 = cursor.getString(2);
+                String rol = cursor.getString(3);
+
+                Usuario usuario = new Usuario(nombre, contrasena, correo2, rol);
+
+
+                lista.add(usuario);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
 
     public boolean eliminar(Libro libro){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
@@ -670,6 +779,18 @@ public class ControlDB {
 
 
         db.delete("alumno", "carnet = ?",  id);
+
+        return true;
+
+    }
+
+    public boolean eliminarU(String usuario){
+
+        String [] id = {usuario};
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+
+
+        db.delete("usuario", "correo = ?",  id);
 
         return true;
 
@@ -742,6 +863,22 @@ public class ControlDB {
         }
     }
 
+    public String actualizar(Usuario usuario){
+        if(verificarIntegridad(usuario,6)){
+            String[] id = {usuario.getCorreo()};
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("nombre", usuario.getNombre());
+            contentValues.put("contrasena", usuario.getContrasena());
+            contentValues.put("rol", usuario.getRol());
+
+            db.update("usuario", contentValues, "correo = ?", id);
+            return "Actualizado";
+        }else {
+            return "Registro no existe";
+        }
+    }
+
     public String actualizar(Docente docente) {
 
         if (verificarIntegridad(docente, 2)){
@@ -763,20 +900,36 @@ public class ControlDB {
 
 
 
-    public boolean inicio(String correo, String contrasena){
+    public String inicio(String correo, String contrasena){
 
         String[] correo1 = {correo, contrasena};
 
-        abrir();
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        String adm = "Administrador";
+        String sec = "Secreataria";
 
         Cursor c = db.rawQuery("select * from usuario where correo = ? AND contrasena = ?", correo1);
 
         if(c.moveToFirst()) {
+            int id = c.getInt(0);
+            String nombre = c.getString(1);
+            String contras = c.getString(2);
+            String email = c.getString(3);
+            String rol = c.getString(4);
 
-            return true;
+            if (email.equals(correo) && contras.equals(contrasena) && rol.equals(adm)) {
+                return "admin";
+            } else if (email.equals(correo) && contras.equals(contrasena) && rol.equals(sec)) {
+                return "secre";
+            } else {
+                return "Usuario no coincide: " + email + contras + rol;
+            }
+
+
+        }else {
+            return "Usuario no existe";
         }
-
-            return false;
     }
 
 
@@ -859,6 +1012,23 @@ public class ControlDB {
 
             }
 
+            case 6:
+            {
+                Usuario usuario = (Usuario) dato;
+                String [] id = {String.valueOf(usuario.getCorreo())};
+                abrir();
+                Cursor cursor = db.query("usuario", null, "correo = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }
+
+
+
             default:
                 return false;
         }
@@ -867,12 +1037,43 @@ public class ControlDB {
 
     public String llenarUsuario(){
         abrir();
-        db.execSQL("DELETE FROM usuario");
+
+        String queryString = "SELECT * FROM usuario";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+
+        }else{
+
             Usuario usuario = new Usuario();
             usuario.setNombre("Administrador");
             usuario.setCorreo("admin@mail.com");
             usuario.setContrasena("123456");
+            usuario.setRol("Administrador");
             insertar(usuario);
+
+            Usuario usuario2 = new Usuario();
+            usuario2.setNombre("Secretaria");
+            usuario2.setCorreo("secre@mail.com");
+            usuario2.setContrasena("123456");
+            usuario2.setRol("Secretaria");
+            insertar(usuario2);
+
+
+        }
+
+
+        db.execSQL("DELETE FROM rol");
+            Rol rol = new Rol();
+            rol.setIdRol(1111);
+            rol.setNombreRol("Administrador");
+            insertar(rol);
+
+            Rol rol2= new Rol();
+            rol2.setIdRol(2222);
+            rol2.setNombreRol("Secretaria");
+            insertar(rol2);
+
         cerrar();
         return "Usuarios de prueba creados";
     }

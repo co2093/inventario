@@ -24,7 +24,7 @@ import java.util.List;
 public class MenuAutorActivity extends AppCompatActivity {
 
     GridView gridView;
-    ImageButton btnAgregarAutor, btnEditarAutor, btnActualizar;
+    ImageButton btnAgregarAutor, btnEditarAutor, btnActualizar, regresarInicio;
     ListView listadoAutor;
     ControlDB DBhelper;
     ArrayAdapter autorArrayAdapter;
@@ -47,6 +47,15 @@ public class MenuAutorActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizar);
         listadoAutor = findViewById(R.id.listado_autor);
         editBusqueda = findViewById(R.id.editBuscar);
+        regresarInicio = findViewById(R.id.imageButtonMenuInicio);
+
+        regresarInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         btnEditarAutor.setOnClickListener(new View.OnClickListener() {
             @Override

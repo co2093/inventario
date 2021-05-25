@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MenuAlumnoActivity extends AppCompatActivity {
 
-    ImageButton btnAgregarAlumno, btnEditarAlumno, btnActualizar;
+    ImageButton btnAgregarAlumno, btnEditarAlumno, btnActualizar, regresarInicio;
     ListView listadoAlumno;
     ControlDB DBhelper;
     ArrayAdapter busquedaAdapter;
@@ -48,6 +48,16 @@ public class MenuAlumnoActivity extends AppCompatActivity {
         System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
         newFilters[editFilters.length] = new InputFilter.AllCaps();
         editBusqueda.setFilters(newFilters);
+
+        regresarInicio = findViewById(R.id.imageButtonMenuInicio);
+
+        regresarInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
 
         btnAgregarAlumno.setOnClickListener(new View.OnClickListener() {

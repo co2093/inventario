@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MenuLibroActivity extends AppCompatActivity {
 
-    ImageButton btnAgregarLibro, btnEditarLibro, btnActualizar;
+    ImageButton btnAgregarLibro, btnEditarLibro, btnActualizar, regresarInicio;
     ListView listadoLibro;
     ControlDB DBhelper;
     ArrayAdapter busquedaAdapter;
@@ -42,6 +42,7 @@ public class MenuLibroActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizarLibro);
         listadoLibro = findViewById(R.id.listado_libro);
         editBusqueda = findViewById(R.id.editBuscarLibro);
+        regresarInicio = findViewById(R.id.imageButtonMenuInicio);
 
         DBhelper = new ControlDB(MenuLibroActivity.this);
         List<Libro> librosListado = DBhelper.getLibros();
@@ -53,6 +54,14 @@ public class MenuLibroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AgregarLibro.class);
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        regresarInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
             }
         });
 
