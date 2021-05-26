@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".MenuLibroActivity"></activity>
+        <activity android:name=".VerTesisActivity"></activity>
+        <activity android:name=".MenuTesisActivity" />
+        <activity android:name=".EditarTesisActivity" />
+        <activity android:name=".AgregarTesisActivity" />
+        <activity android:name=".MenuLibroActivity" />
         <activity android:name=".EditarLibroActivity" />
         <activity android:name=".AgregarLibro" />
         <activity android:name=".MenuRazonActivity" />

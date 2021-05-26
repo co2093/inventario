@@ -28,5 +28,13 @@ public class MenuPrincipalDocumentos extends AppCompatActivity {
             }
         });
 
+       menuTesis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuTesisActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
     }
 }

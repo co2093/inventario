@@ -18,6 +18,7 @@ public class ControlDB {
    // private static final String [] camposUsuario = new String[] {"id, nombre, correo, contrasena"};
    private static final String [] camposAutor = new String[] {"id", "nombre"};
    private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
+   private static final String [] camposTesis = new String[] {"id_tesis", "nombre_tesis", "fecha_publicacion", "idioma", "id_autor_tesis"};
 
 
     private final Context context;
@@ -50,7 +51,7 @@ public class ControlDB {
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
                 db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
-                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256),titulo_tesis VARCHAR (256),fecha_publicacion VARCHAR(128),id_idioma INTEGER,id_autor_tesis INTEGER);");
+                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER PRIMARY KEY AUTOINCREMENT,nombre_tesis VARCHAR (256),fecha_publicacion VARCHAR(128),idioma VARCHAR(128),id_autor_tesis INTEGER (13));");
 
                 //Francisco
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
@@ -75,7 +76,22 @@ public class ControlDB {
     public void cerrar(){
         DBHelper.close();
     }
+    public String insertar(Tesis tesis){
+        if(verificarIntegridad(tesis, 6)){
+            return "Ya existe una tesis con este Titulo";
+        }else{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre_tesis", tesis.getTitulo_tesis());
+            contentValues.put("fecha_publicacion", tesis.getFecha_publicacion());
+            contentValues.put("idioma", tesis.getIdioma());
+            contentValues.put("id_autor_tesis", tesis.getId_autor());
 
+            db.insert("tesis", null, contentValues);
+
+            return "Tesis guardada correctamente";
+        }
+
+    }
     public String insertar(Libro libro){
 
         if(verificarIntegridad(libro, 5)){
@@ -235,6 +251,18 @@ public class ControlDB {
     public boolean eliminar(Categoria categoria){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String queryString = "DELETE FROM categoria WHERE id_categoria = " + categoria.getId_categoria();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean eliminar(Tesis tesis){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM tesis WHERE id_tesis =" + tesis.getId_tesis();
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()){
@@ -420,6 +448,31 @@ public class ControlDB {
         return lista;
     }
 
+    public List<Tesis> getTesis(){
+
+        List<Tesis> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM tesis";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id_tesis = cursor.getInt(0);
+                String tituloTesis = cursor.getString(1);
+                String fechapub = cursor.getString(2);
+                int autor = cursor.getInt(3);
+                String idioma = cursor.getString(4);
+                Tesis tesis = new Tesis(id_tesis, tituloTesis, fechapub, autor, idioma);
+                lista.add(tesis);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
 
 
 
@@ -533,6 +586,37 @@ public class ControlDB {
                 String idioma = cursor.getString(5);
                 Libro libro = new Libro(isbn2,nombreLibro,autor,ejemplar,editorial, idioma);
                 lista.add(libro);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+
+    }
+
+    public List<Tesis> consultaTesis(String nombre_tesis){
+            List<Tesis> lista = new ArrayList<>();
+        //String queryString = "SELECT * FROM tesis WHERE id_tesis = " + nombre_tesis;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        //Cursor cursor = db.rawQuery(queryString, null);
+
+        String[] titulo_tesis = {nombre_tesis};
+
+        Cursor cursor = db.query("tesis", camposTesis, "nombre_tesis = ?", titulo_tesis, null,null,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id_tesis2 = cursor.getInt(0);
+                String tituloTesis = cursor.getString(1);
+                String fechapub = cursor.getString(2);
+                int autor = cursor.getInt(3);
+                String idioma = cursor.getString(4);
+                Tesis tesis = new Tesis(id_tesis2, tituloTesis, fechapub, autor, idioma);
+                lista.add(tesis);
+
             }while (cursor.moveToNext());
         }else {
 
@@ -760,6 +844,28 @@ public class ControlDB {
 
     }
 
+    public String actualizar(Tesis tesis){
+
+        if (verificarIntegridad(tesis, 5)){
+            String[] id = {String.valueOf(tesis.getId_tesis())};
+            ContentValues contentValues = new ContentValues();
+
+
+            contentValues.put("nombre_tesis", tesis.getTitulo_tesis());
+            contentValues.put("fecha_publicacion", tesis.getFecha_publicacion());
+            contentValues.put("idioma", tesis.getIdioma());
+            contentValues.put("id_autor_tesis", tesis.getId_autor());
+
+            db.update("tesis", contentValues, "id_tesis = ?", id);
+
+            return "Registro Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
 
 
 
@@ -849,6 +955,22 @@ public class ControlDB {
                 String [] id = {String.valueOf(libro.getIsbn())};
                 abrir();
                 Cursor cursor = db.query("libro", null, "isbn = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
+
+            }
+
+            case 6:
+            {
+                Tesis tesis = (Tesis) dato;
+                String [] id = {String.valueOf(tesis.getTitulo_tesis())};
+                abrir();
+                Cursor cursor = db.query("tesis", null, "nombre_tesis = ?", id, null, null, null);
 
                 if(cursor.moveToFirst()){
                     return true;
