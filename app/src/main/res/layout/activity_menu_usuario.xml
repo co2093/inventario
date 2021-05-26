@@ -15,24 +15,13 @@
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <ImageButton
-        android:id="@+id/imageButtonMenuInicio"
-        android:layout_width="74dp"
-        android:layout_height="61dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.866"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <TextView
         android:id="@+id/textCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=">Libro"
+        android:text=">Usuario"
         app:layout_constraintStart_toEndOf="@+id/textHome"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btnAgregarLibro"
+            android:id="@+id/btnAgregarUsuario"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -64,28 +53,28 @@
             android:background="@drawable/btn_agregar" />
 
         <ImageButton
-            android:id="@+id/btnEditarLibro"
+            android:id="@+id/btnEditarUsuario"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginStart="68dp"
             android:layout_marginLeft="68dp"
             android:layout_marginTop="8dp"
-            android:layout_toEndOf="@+id/btnAgregarLibro"
-            android:layout_toRightOf="@+id/btnAgregarLibro"
+            android:layout_toEndOf="@+id/btnAgregarUsuario"
+            android:layout_toRightOf="@+id/btnAgregarUsuario"
             android:layout_weight="1"
             android:background="@drawable/btn_editar" />
 
         <ImageButton
-            android:id="@+id/btnActualizarLibro"
+            android:id="@+id/btnActualizarUsuario"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginStart="69dp"
             android:layout_marginLeft="69dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/btnEditarLibro"
-            android:layout_toRightOf="@+id/btnEditarLibro"
+            android:layout_toEndOf="@+id/btnEditarUsuario"
+            android:layout_toRightOf="@+id/btnEditarUsuario"
             android:layout_weight="1"
             android:background="@drawable/btn_regresar" />
 
@@ -93,7 +82,7 @@
             android:id="@+id/textAgregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAgregarLibro"
+            android:layout_below="@+id/btnAgregarUsuario"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="17dp"
@@ -105,7 +94,7 @@
             android:id="@+id/txtEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnEditarLibro"
+            android:layout_below="@+id/btnEditarUsuario"
             android:layout_marginStart="74dp"
             android:layout_marginLeft="74dp"
             android:layout_marginTop="-3dp"
@@ -117,7 +106,7 @@
             android:id="@+id/textBorrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnActualizarLibro"
+            android:layout_below="@+id/btnActualizarUsuario"
             android:layout_marginStart="71dp"
             android:layout_marginLeft="71dp"
             android:layout_marginTop="3dp"
@@ -128,7 +117,7 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/editBuscarLibro"
+        android:id="@+id/editBuscar"
         android:layout_width="332dp"
         android:layout_height="39dp"
         android:layout_marginStart="16dp"
@@ -137,10 +126,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
-
+        android:inputType="text"
         android:maxLength="7"
-        android:hint="Buscar por ISBN..."
-        android:inputType="number"
+        android:hint="Buscar por email..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -157,10 +145,10 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBuscarLibro">
+        app:layout_constraintTop_toBottomOf="@+id/editBuscar">
 
         <ListView
-            android:id="@+id/listado_libro"
+            android:id="@+id/listado_usuario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="70dp"
@@ -193,6 +181,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInfo1" />
 
+    <ImageButton
+        android:id="@+id/imageButtonMenuInicio"
+        android:layout_width="74dp"
+        android:layout_height="61dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.866"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

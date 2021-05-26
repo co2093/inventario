@@ -27,22 +27,26 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar = findViewById(R.id.btnLogin);
         helper = new ControlDB(MainActivity.this);
 
+        //Usuario de prueba
+        helper.llenarUsuario();
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(helper.inicio(editTextUsuario.getText().toString(), editTextContrasena.getText().toString())){
+                if(helper.inicio(editTextUsuario.getText().toString(), editTextContrasena.getText().toString()) == "admin"){
 
                     Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
                     startActivityForResult(intent,0);
-                }else{
-                    Toast.makeText(MainActivity.this, "Usuario no existe", Toast.LENGTH_LONG).show();
+                }else if (helper.inicio(editTextUsuario.getText().toString(), editTextContrasena.getText().toString()) == "secre"){
+                    Intent intent = new Intent(v.getContext(), MenuPrincipalActivityDos.class);
+                    startActivityForResult(intent,0);
+                }else {
+                    Toast.makeText(MainActivity.this, helper.inicio(editTextUsuario.getText().toString(), editTextContrasena.getText().toString()), Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        //Usuario de prueba
-        helper.llenarUsuario();
+
 
 
 

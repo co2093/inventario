@@ -12,6 +12,7 @@ public class MenuPrincipalPersonas extends AppCompatActivity {
     Button btnActivityDocentes;
     Button btnActivityAlumnos;
     Button btnActivityAutores;
+    Button btnActivityUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MenuPrincipalPersonas extends AppCompatActivity {
         btnActivityAlumnos = findViewById(R.id.btnMenuAlumnos);
         btnActivityDocentes = findViewById(R.id.btnMenuDocentes);
         btnActivityAutores = findViewById(R.id.btnMenuAutores);
+        btnActivityUsuarios = findViewById(R.id.btnMenuUsuarios);
 
         btnActivityDocentes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +44,14 @@ public class MenuPrincipalPersonas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MenuAutorActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
+        btnActivityUsuarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuUsuarioActivity.class);
                 startActivityForResult(intent,0);
             }
         });

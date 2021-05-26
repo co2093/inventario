@@ -6,11 +6,13 @@ import android.content.ContentProvider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -22,27 +24,32 @@ import android.app.AlertDialog;
 
 import java.util.List;
 
-public class MenuDocenteActivity extends AppCompatActivity {
+public class MenuUsuarioActivity extends AppCompatActivity {
 
-    ImageButton btnAgregarDocente, btnEditarDocente, btnActualizar, regresarInicio;
-    ListView listadoDocente;
+    ImageButton btnAgregarUsuario, btnEditarUsuario, btnActualizar;
+    ImageButton regresarInicio;
+    ListView listadoUsuario;
     ControlDB DBhelper;
     ArrayAdapter busquedaAdapter;
-    ArrayAdapter docenteArrayAdapter;
+    ArrayAdapter usuarioArrayAdapter;
     EditText editBusqueda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_docente);
+        setContentView(R.layout.activity_menu_usuario);
 
-
-        btnAgregarDocente = findViewById(R.id.btnAgregar);
-        btnEditarDocente = findViewById(R.id.btnEditar);
-        btnActualizar = findViewById(R.id.btnActualizar);
-        listadoDocente = findViewById(R.id.listado_docente);
+        btnAgregarUsuario = findViewById(R.id.btnAgregarUsuario);
+        btnEditarUsuario = findViewById(R.id.btnEditarUsuario);
+        btnActualizar = findViewById(R.id.btnActualizarUsuario);
+        listadoUsuario = findViewById(R.id.listado_usuario);
         editBusqueda = findViewById(R.id.editBuscar);
         regresarInicio = findViewById(R.id.imageButtonMenuInicio);
+
+        DBhelper = new ControlDB(MenuUsuarioActivity.this);
+        List<Usuario> usuariosListado = DBhelper.getUsuarios();
+
+        listadoUsuario(DBhelper);
 
         regresarInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,18 +59,18 @@ public class MenuDocenteActivity extends AppCompatActivity {
             }
         });
 
-        btnAgregarDocente.setOnClickListener(new View.OnClickListener() {
+        btnAgregarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AgregarDocenteActivity.class);
+                Intent intent = new Intent(v.getContext(), AgregarUsuarioActivity.class);
                 startActivityForResult(intent,0);
             }
         });
 
-        btnEditarDocente.setOnClickListener(new View.OnClickListener() {
+        btnEditarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), EditarDocenteActivity.class);
+                Intent intent = new Intent(v.getContext(), EditarUsuarioActivity.class);
                 startActivityForResult(intent,0);
             }
         });
@@ -72,43 +79,29 @@ public class MenuDocenteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                listaDocentes(DBhelper);
+                listadoUsuario(DBhelper);
                 editBusqueda.setText("");
             }
         });
 
 
-        btnActualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                listaDocentes(DBhelper);
-                editBusqueda.setText("");
-            }
-        });
-
-        DBhelper = new ControlDB(MenuDocenteActivity.this);
-        List<Docente> docentesListado = DBhelper.getDocentes();
-
-        listaDocentes(DBhelper);
-
-
-        listadoDocente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listadoUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Docente docente = (Docente) parent.getItemAtPosition(position);
+                Usuario usuario = (Usuario) parent.getItemAtPosition(position);
 
-                AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuDocenteActivity.this);
-                dialogo.setTitle("Eliminar Docente");
-                dialogo.setMessage("Va a eliminar un docente");
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuUsuarioActivity.this);
+                dialogo.setTitle("Eliminar Usuario");
+                dialogo.setMessage("Va a eliminar un usuario");
                 dialogo.setCancelable(false);
                 dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DBhelper.eliminar(docente);
-                        listaDocentes(DBhelper);
+                        DBhelper.eliminarU(usuario.getCorreo());
+                        listadoUsuario(DBhelper);
 
-                        Toast.makeText(MenuDocenteActivity.this, "Eliminado " + docente.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuUsuarioActivity.this, "Eliminado " + usuario.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -127,7 +120,6 @@ public class MenuDocenteActivity extends AppCompatActivity {
 
 
 
-
         editBusqueda.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -135,16 +127,17 @@ public class MenuDocenteActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuDocenteActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuUsuarioActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
 
-                        busquedaAdapter = new ArrayAdapter<Docente>(MenuDocenteActivity.this, android.R.layout.simple_expandable_list_item_1, DBhelper.consultaD(Integer.valueOf(editBusqueda.getText().toString())));
-                        listadoDocente.setAdapter(busquedaAdapter);
+                        busquedaAdapter = new ArrayAdapter<Usuario>(MenuUsuarioActivity.this, android.R.layout.simple_expandable_list_item_1, DBhelper.consultaUsuario(editBusqueda.getText().toString()));
+                        listadoUsuario.setAdapter(busquedaAdapter);
 
                         if(busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuDocenteActivity.this, "No se ha encontrado registros con ese ID", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuUsuarioActivity.this, "No se ha encontrado registros con ese Correo", Toast.LENGTH_LONG).show();
                         }
+
 
                         return true;
                     }
@@ -160,17 +153,16 @@ public class MenuDocenteActivity extends AppCompatActivity {
 
 
 
-
-
-
     }
 
-    public void listaDocentes(ControlDB helper){
-        docenteArrayAdapter = new ArrayAdapter<Docente>(MenuDocenteActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getDocentes());
-        listadoDocente.setAdapter(docenteArrayAdapter);
+    public void listadoUsuario(ControlDB helper){
+        usuarioArrayAdapter= new ArrayAdapter<Usuario>(MenuUsuarioActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getUsuarios());
+        listadoUsuario.setAdapter(usuarioArrayAdapter);
     }
 
     public void cancelar(){
-        Toast.makeText(MenuDocenteActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(MenuUsuarioActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
     }
+
+
 }
