@@ -57,7 +57,7 @@ public class AgregarTesisActivity extends AppCompatActivity {
 
 
             String titulo = editTextTitulo.getText().toString();
-            Integer autor = Integer.valueOf(spinnerAutores.getSelectedItem().toString());
+            String autor = spinnerAutores.getSelectedItem().toString();
             String fechapub = editTextFecha.getText().toString();
             String idioma = editTextIdiomaTesis.getText().toString();
             String regInsertados;
@@ -79,7 +79,7 @@ public class AgregarTesisActivity extends AppCompatActivity {
     }
 
     public void llenarSpinner(ControlDB helper){
-        tesisArrayAdapter= new ArrayAdapter<Integer>(AgregarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getAutoresID());
+        tesisArrayAdapter= new ArrayAdapter<String>(AgregarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getAlumnosCarnet());
         spinnerAutores.setAdapter(tesisArrayAdapter);
     }
 

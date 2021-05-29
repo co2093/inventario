@@ -4,12 +4,12 @@ public class Tesis {
     private int id_tesis;
     private String titulo_tesis;
     private String fecha_publicacion;
-    private int id_autor;
+    private String id_autor;
     private String idioma;
 
     public Tesis() { }
 
-    public Tesis(int id_tesis, String titulo_tesis, String fecha_publicacion, int id_autor, String idioma) {
+    public Tesis(int id_tesis, String titulo_tesis, String fecha_publicacion, String id_autor, String idioma) {
         this.id_tesis = id_tesis;
         this.titulo_tesis = titulo_tesis;
         this.fecha_publicacion = fecha_publicacion;
@@ -41,11 +41,11 @@ public class Tesis {
         this.fecha_publicacion = fecha_publicacion;
     }
 
-    public int getId_autor() {
+    public String getId_autor() {
         return id_autor;
     }
 
-    public void setId_autor(int id_autor) {
+    public void setId_autor(String id_autor) {
         this.id_autor = id_autor;
     }
 

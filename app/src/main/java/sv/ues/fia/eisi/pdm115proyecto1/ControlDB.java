@@ -34,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inv_7.s3db";
+        private static final String BASE_DATOS = "inve_2.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -55,7 +55,7 @@ public class ControlDB {
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
                 db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
-                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256),titulo_tesis VARCHAR (256),fecha_publicacion VARCHAR(128),id_idioma INTEGER,id_autor_tesis INTEGER);");
+                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256), fecha_publicacion VARCHAR(128),idioma VARCHAR(128),id_autor_tesis VARCHAR);");
 
                 //Francisco
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
@@ -133,8 +133,9 @@ public class ControlDB {
                 int id_tesis = cursor.getInt(0);
                 String tituloTesis = cursor.getString(1);
                 String fechapub = cursor.getString(2);
-                int autor = cursor.getInt(3);
-                String idioma = cursor.getString(4);
+                String idioma = cursor.getString(3);
+                String autor = cursor.getString(4);
+
                 Tesis tesis = new Tesis(id_tesis, tituloTesis, fechapub, autor, idioma);
                 lista.add(tesis);
             }while (cursor.moveToNext());
@@ -161,7 +162,7 @@ public class ControlDB {
                 int id_tesis2 = cursor.getInt(0);
                 String tituloTesis = cursor.getString(1);
                 String fechapub = cursor.getString(2);
-                int autor = cursor.getInt(3);
+                String autor = cursor.getString(3);
                 String idioma = cursor.getString(4);
                 Tesis tesis = new Tesis(id_tesis2, tituloTesis, fechapub, autor, idioma);
                 lista.add(tesis);
@@ -177,7 +178,7 @@ public class ControlDB {
 
     public String actualizar(Tesis tesis){
 
-        if (verificarIntegridad(tesis, 8)){
+        if (verificarIntegridad(tesis, 9)){
             String[] id = {String.valueOf(tesis.getId_tesis())};
             ContentValues contentValues = new ContentValues();
 
@@ -731,6 +732,33 @@ public class ControlDB {
                 String rol = cursor.getString(1);
 
                 lista.add(rol);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
+    public List<String> getAlumnosCarnet(){
+
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM alumno";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String carnet = cursor.getString(0);
+
+                lista.add(carnet);
 
             }while (cursor.moveToNext());
         }else {
@@ -1327,6 +1355,21 @@ public class ControlDB {
                 } else {
                     return false;
                 }
+            }
+
+            case 9:{
+
+                Tesis tesis = (Tesis) dato;
+                String[] id = {String.valueOf(tesis.getId_tesis())};
+                abrir();
+                Cursor cursor = db.query("tesis", null, "id_tesis = ?", id, null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             }
 
 
