@@ -15,7 +15,6 @@
         <activity android:name=".MenuUsuarioActivity" />
         <activity android:name=".MenuLibroActivity" />
         <activity android:name=".EditarLibroActivity" />
-        <activity android:name=".VerTesisActivity"/>
         <activity android:name=".MenuTesisActivity" />
         <activity android:name=".EditarTesisActivity" />
         <activity android:name=".EditarEquipoInformaticoActivity" />
