@@ -94,7 +94,7 @@ public class MenuEquipoInformaticoActivity extends AppCompatActivity {
                         listadoEquipo.setAdapter(busquedaAdapter);
 
                         if (busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuEquipoInformaticoActivity.this, "No se ha encontrado registros con ese Carnet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuEquipoInformaticoActivity.this, "No se ha encontrado registros con ese nombre", Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }

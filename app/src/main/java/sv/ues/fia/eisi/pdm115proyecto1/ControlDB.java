@@ -16,10 +16,11 @@ import java.util.List;
 
 public class ControlDB {
 
-   private static final String [] camposUsuario = new String[] {"nombre, contrasena, correo, rol"};
-   private static final String [] camposAutor = new String[] {"id", "nombre"};
-   private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
-   private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "color", "categoria", "fecha"};
+    private static final String [] camposUsuario = new String[] {"nombre, contrasena, correo, rol"};
+    private static final String [] camposAutor = new String[] {"id", "nombre"};
+    private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
+    private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "color", "categoria", "fecha"};
+    private static final String [] camposTesis = new String[] {"id_tesis", "nombre_tesis", "fecha_publicacion", "idioma", "id_autor_tesis"};
 
 
     private final Context context;
@@ -33,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inv_5.s3db";
+        private static final String BASE_DATOS = "inv_7.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -89,6 +90,115 @@ public class ControlDB {
 
         return "Rol agregado";
     }
+
+    public String insertar(Tesis tesis){
+        if(verificarIntegridad(tesis, 8)){
+            return "Ya existe una tesis con este Titulo";
+        }else{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre_tesis", tesis.getTitulo_tesis());
+            contentValues.put("fecha_publicacion", tesis.getFecha_publicacion());
+            contentValues.put("idioma", tesis.getIdioma());
+            contentValues.put("id_autor_tesis", tesis.getId_autor());
+
+            db.insert("tesis", null, contentValues);
+
+            return "Tesis guardada correctamente";
+        }
+
+    }
+
+    public boolean eliminar(Tesis tesis){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM tesis WHERE id_tesis =" + tesis.getId_tesis();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public List<Tesis> getTesis(){
+
+        List<Tesis> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM tesis";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id_tesis = cursor.getInt(0);
+                String tituloTesis = cursor.getString(1);
+                String fechapub = cursor.getString(2);
+                int autor = cursor.getInt(3);
+                String idioma = cursor.getString(4);
+                Tesis tesis = new Tesis(id_tesis, tituloTesis, fechapub, autor, idioma);
+                lista.add(tesis);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Tesis> consultaTesis(String nombre_tesis) {
+        List<Tesis> lista = new ArrayList<>();
+        //String queryString = "SELECT * FROM tesis WHERE id_tesis = " + nombre_tesis;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        //Cursor cursor = db.rawQuery(queryString, null);
+
+        String[] titulo_tesis = {nombre_tesis};
+
+        Cursor cursor = db.query("tesis", camposTesis, "nombre_tesis = ?", titulo_tesis, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id_tesis2 = cursor.getInt(0);
+                String tituloTesis = cursor.getString(1);
+                String fechapub = cursor.getString(2);
+                int autor = cursor.getInt(3);
+                String idioma = cursor.getString(4);
+                Tesis tesis = new Tesis(id_tesis2, tituloTesis, fechapub, autor, idioma);
+                lista.add(tesis);
+
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public String actualizar(Tesis tesis){
+
+        if (verificarIntegridad(tesis, 8)){
+            String[] id = {String.valueOf(tesis.getId_tesis())};
+            ContentValues contentValues = new ContentValues();
+
+
+            contentValues.put("nombre_tesis", tesis.getTitulo_tesis());
+            contentValues.put("fecha_publicacion", tesis.getFecha_publicacion());
+            contentValues.put("idioma", tesis.getIdioma());
+            contentValues.put("id_autor_tesis", tesis.getId_autor());
+
+            db.update("tesis", contentValues, "id_tesis = ?", id);
+
+            return "Registro Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
+
+
 
     public String insertar(Libro libro){
 
@@ -1206,6 +1316,18 @@ public class ControlDB {
 
             }
 
+            case 8: {
+                Tesis tesis = (Tesis) dato;
+                String[] id = {String.valueOf(tesis.getTitulo_tesis())};
+                abrir();
+                Cursor cursor = db.query("tesis", null, "nombre_tesis = ?", id, null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
 
 
             default:
@@ -1243,15 +1365,15 @@ public class ControlDB {
 
 
         db.execSQL("DELETE FROM rol");
-            Rol rol = new Rol();
-            rol.setIdRol(1111);
-            rol.setNombreRol("Administrador");
-            insertar(rol);
+        Rol rol = new Rol();
+        rol.setIdRol(1111);
+        rol.setNombreRol("Administrador");
+        insertar(rol);
 
-            Rol rol2= new Rol();
-            rol2.setIdRol(2222);
-            rol2.setNombreRol("Secretaria");
-            insertar(rol2);
+        Rol rol2= new Rol();
+        rol2.setIdRol(2222);
+        rol2.setNombreRol("Secretaria");
+        insertar(rol2);
 
         cerrar();
         return "Usuarios de prueba creados";
