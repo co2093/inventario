@@ -7,6 +7,32 @@
     tools:context=".EditarCategoriaActivity">
 
     <TextView
+        android:id="@+id/textagregarCategoria10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="144dp"
+        android:text="Categoría:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <EditText
+        android:id="@+id/editCategoriaEdit"
+        android:layout_width="186dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="136dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <TextView
         android:id="@+id/textInfo4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +92,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btnAgregar"
+            android:id="@+id/btnAgregarCatEdit"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -76,13 +102,14 @@
             android:layout_marginLeft="97dp"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
+            android:onClick="actualizarCategoria"
             android:background="@drawable/btn_guardar" />
 
         <TextView
             android:id="@+id/textAgregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAgregar"
+            android:layout_below="@+id/btnAgregarCatEdit"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="97dp"
@@ -91,15 +118,15 @@
             android:text="Guardar" />
 
         <ImageButton
-            android:id="@+id/btnRegresar"
+            android:id="@+id/btnRegresarCatEdit"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginStart="35dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/btnAgregar"
-            android:layout_toRightOf="@+id/btnAgregar"
+            android:layout_toEndOf="@+id/btnAgregarCatEdit"
+            android:layout_toRightOf="@+id/btnAgregarCatEdit"
             android:layout_weight="1"
             android:background="@drawable/btn_regresar" />
 
@@ -107,7 +134,7 @@
             android:id="@+id/textRegresar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnRegresar"
+            android:layout_below="@+id/btnRegresarCatEdit"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="-1dp"
@@ -121,25 +148,25 @@
         android:id="@+id/textagregarCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="36dp"
-        android:text="Categoría:"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="52dp"
+        android:text="ID:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <EditText
-        android:id="@+id/editCategoria"
+        android:id="@+id/editTextCategoriaIDEdit"
         android:layout_width="186dp"
         android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toEndOf="@+id/textagregarCategoria"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 

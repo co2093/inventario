@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.audiofx.DynamicsProcessing;
 import android.provider.ContactsContract;
 import android.widget.ListView;
 
@@ -18,6 +19,7 @@ public class ControlDB {
    private static final String [] camposUsuario = new String[] {"nombre, contrasena, correo, rol"};
    private static final String [] camposAutor = new String[] {"id", "nombre"};
    private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
+   private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "color", "categoria", "fecha"};
 
 
     private final Context context;
@@ -31,7 +33,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inv_4.s3db";
+        private static final String BASE_DATOS = "inv_5.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -47,6 +49,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE alumno (carnet VARCHAR(128) NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), contrasena VARCAHR (128), correo VARCHAR(128), rol VARCHAR(128));");
                 db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
+                db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), color VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
@@ -108,6 +111,29 @@ public class ControlDB {
 
 
     }
+
+    public String insertar(EquipoInformatico equipoInformatico){
+
+        if(verificarIntegridad(equipoInformatico,7)){
+            return "Ya existe un equipo con este ID";
+        }else {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("id", equipoInformatico.getId_equipo());
+            contentValues.put("nombre", equipoInformatico.getNombreEquipo());
+            contentValues.put("modelo", equipoInformatico.getModeloEquipo());
+            contentValues.put("marca", equipoInformatico.getMarcaEquipo());
+            contentValues.put("color", equipoInformatico.getColorEquipo());
+            contentValues.put("fecha", equipoInformatico.getFechaEquipoAdquisicion());
+            contentValues.put("categoria", equipoInformatico.getCategoriaEquipo());
+
+            db.insert("equipo", null, contentValues);
+
+            return "Equipo agregado";
+        }
+
+    }
+
 
     public String insertar(Usuario usuario){
 
@@ -303,6 +329,26 @@ public class ControlDB {
                 String nombre_categoria = cursor.getString(1);
                 Categoria categoria = new Categoria(id_categoria,nombre_categoria);
                 lista.add(categoria);
+            }while (cursor.moveToNext());
+        }else{
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<String> getCatNombres(){
+        List<String> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM categoria";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            do{
+
+                String nombre_categoria = cursor.getString(1);
+
+                lista.add(nombre_categoria);
             }while (cursor.moveToNext());
         }else{
 
@@ -587,6 +633,38 @@ public class ControlDB {
 
     }
 
+    public List<EquipoInformatico> getEquipos(){
+        List<EquipoInformatico> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM equipo";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id_equipo = cursor.getInt(0);
+                String nombreEquipo = cursor.getString(1);
+                String modeloEquipo = cursor.getString(2);
+                String marcaEquipo = cursor.getString(3);
+                String colorEquipo = cursor.getString(4);
+                String categoriaEquipo = cursor.getString(5);
+                String fechaEquipoAdquisicion = cursor.getString(6);
+
+                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, colorEquipo, categoriaEquipo, fechaEquipoAdquisicion);
+                lista.add(equipoInformatico);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
     public List<Libro> consultaLibro(int isbn){
         List<Libro> lista = new ArrayList<>();
         String queryString = "SELECT * FROM libro WHERE isbn = " + isbn;
@@ -706,6 +784,39 @@ public class ControlDB {
 
     }
 
+    public List<EquipoInformatico> consultaEquipo(String nombre){
+        List<EquipoInformatico> lista = new ArrayList<>();
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        String[] carnetd = {nombre};
+
+        Cursor cursor = db.query("equipo", camposEquipo, "nombre = ?", carnetd, null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id_equipo = cursor.getInt(0);
+                String nombreEquipo = cursor.getString(1);
+                String modeloEquipo = cursor.getString(2);
+                String marcaEquipo = cursor.getString(3);
+                String colorEquipo = cursor.getString(4);
+                String categoriaEquipo = cursor.getString(5);
+                String fechaEquipoAdquisicion = cursor.getString(6);
+
+                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, colorEquipo, categoriaEquipo, fechaEquipoAdquisicion);
+                lista.add(equipoInformatico);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
     public List<Usuario> consultaUsuario(String correo){
         List<Usuario> lista = new ArrayList<>();
 
@@ -749,6 +860,18 @@ public class ControlDB {
     public boolean eliminar(Libro libro){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String queryString = "DELETE FROM libro WHERE isbn =" + libro.getIsbn();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean eliminar(EquipoInformatico equipoInformatico){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM equipo WHERE id =" + equipoInformatico.getId_equipo();
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()){
@@ -848,6 +971,47 @@ public class ControlDB {
         }
 
     }
+
+    public String actualizar(Categoria categoria) {
+
+        if (verificarIntegridad(categoria, 4)){
+            String[] id = {String.valueOf(categoria.getId_categoria())};
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre_categoria", categoria.getNombre_categoria());
+
+            db.update("categoria", contentValues, "id_categoria = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
+    public String actualizar(EquipoInformatico equipoInformatico) {
+
+        if (verificarIntegridad(equipoInformatico, 7)){
+            String[] id = {String.valueOf(equipoInformatico.getId_equipo())};
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("nombre", equipoInformatico.getNombreEquipo());
+            contentValues.put("modelo", equipoInformatico.getModeloEquipo());
+            contentValues.put("marca", equipoInformatico.getMarcaEquipo());
+            contentValues.put("color", equipoInformatico.getColorEquipo());
+            contentValues.put("fecha", equipoInformatico.getFechaEquipoAdquisicion());
+            contentValues.put("categoria", equipoInformatico.getCategoriaEquipo());
+
+            db.update("equipo", contentValues, "id = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
 
     public String actualizar(Alumno alumno){
         if(verificarIntegridad(alumno,3)){
@@ -1018,6 +1182,21 @@ public class ControlDB {
                 String [] id = {String.valueOf(usuario.getCorreo())};
                 abrir();
                 Cursor cursor = db.query("usuario", null, "correo = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }
+
+            case 7:
+            {
+                EquipoInformatico equipoInformatico = (EquipoInformatico) dato;
+                String [] id = {String.valueOf(equipoInformatico.getId_equipo())};
+                abrir();
+                Cursor cursor = db.query("equipo", null, "id = ?", id, null, null, null);
 
                 if(cursor.moveToFirst()){
                     return true;

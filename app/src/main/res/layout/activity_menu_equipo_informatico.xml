@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriaActivity">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/textHome"
@@ -17,16 +15,6 @@
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text=">Gestion>Categoría"
-        app:layout_constraintStart_toEndOf="@+id/textHome"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/imageButtonMenuInicio"
         android:layout_width="74dp"
@@ -38,6 +26,15 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.866"
         app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/textCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=">EquipoInformatico"
+        app:layout_constraintStart_toEndOf="@+id/textHome"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -54,41 +51,41 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btnAgregar"
+            android:id="@+id/btnAgregarEquipo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="47dp"
-            android:layout_marginLeft="47dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@drawable/btn_agregar" />
 
         <ImageButton
-            android:id="@+id/btnEditar"
+            android:id="@+id/btnEditarEquipo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@+id/btnAgregar"
-            android:layout_toRightOf="@+id/btnAgregar"
+            android:layout_marginStart="68dp"
+            android:layout_marginLeft="68dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/btnAgregarEquipo"
+            android:layout_toRightOf="@+id/btnAgregarEquipo"
             android:layout_weight="1"
             android:background="@drawable/btn_editar" />
 
         <ImageButton
-            android:id="@+id/btnRegresar"
+            android:id="@+id/btnActualizarEquipo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="46dp"
-            android:layout_marginLeft="46dp"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@+id/btnEditar"
-            android:layout_toRightOf="@+id/btnEditar"
+            android:layout_marginStart="69dp"
+            android:layout_marginLeft="69dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/btnEditarEquipo"
+            android:layout_toRightOf="@+id/btnEditarEquipo"
             android:layout_weight="1"
             android:background="@drawable/btn_regresar" />
 
@@ -96,11 +93,11 @@
             android:id="@+id/textAgregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAgregar"
+            android:layout_below="@+id/btnAgregarEquipo"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
             android:layout_marginTop="0dp"
             android:text="Agregar" />
 
@@ -108,29 +105,32 @@
             android:id="@+id/txtEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnEditar"
-            android:layout_marginStart="56dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginTop="-1dp"
+            android:layout_below="@+id/btnEditarEquipo"
+            android:layout_marginStart="74dp"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="-3dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
             android:text="Editar" />
 
         <TextView
-            android:id="@+id/textRegresar"
+            android:id="@+id/textBorrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnRegresar"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="237dp"
-            android:layout_marginLeft="237dp"
-            android:layout_marginTop="0dp"
+            android:layout_below="@+id/btnActualizarEquipo"
+            android:layout_marginStart="71dp"
+            android:layout_marginLeft="71dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/txtEditar"
+            android:layout_toRightOf="@+id/txtEditar"
             android:text="Actualizar" />
+
     </RelativeLayout>
 
+
+
     <EditText
-        android:id="@+id/editBuscar"
+        android:id="@+id/editBuscarEquipoMenu"
         android:layout_width="332dp"
         android:layout_height="39dp"
         android:layout_marginStart="16dp"
@@ -139,8 +139,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Buscar..."
+        android:inputType="text"
+        android:hint="Buscar por nombre..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -157,13 +157,16 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBuscar">
+        app:layout_constraintTop_toBottomOf="@+id/editBuscarEquipoMenu">
 
         <ListView
-            android:id="@+id/lista_consulta"
+            android:id="@+id/listado_equipo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnWidth="70dp" />
+            android:columnWidth="70dp"
+            android:gravity="center"
+            android:numColumns="auto_fit" />
+
 
     </LinearLayout>
 
@@ -174,7 +177,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
-        android:text="INFO:"
+        android:text="Información:"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,18 +189,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:text="Seleccione un registro y a continuación una de las"
+        android:text="Seleccione un registro para eliminarlo."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInfo1" />
 
-    <TextView
-        android:id="@+id/textInfo3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:text="opciones de mantenimiento: Agregar, Editar o Borrar."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInfo2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

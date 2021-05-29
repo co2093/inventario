@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".MenuPrincipalActivityDos"></activity>
+        <activity android:name=".EditarEquipoInformaticoActivity" />
+        <activity android:name=".AgregarEquipoInformaticoActivity" />
+        <activity android:name=".MenuEquipoInformaticoActivity" />
+        <activity android:name=".MenuPrincipalActivityDos" />
         <activity android:name=".EditarUsuarioActivity" />
         <activity android:name=".AgregarUsuarioActivity" />
         <activity android:name=".MenuUsuarioActivity" />

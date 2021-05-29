@@ -23,7 +23,7 @@ import java.util.List;
 
 public class CategoriaActivity extends AppCompatActivity {
 
-    ImageButton btn_agregar, btn_Actualizar, btnEditar, btn_Borrar;
+    ImageButton btn_agregar, btn_Actualizar, btnEditar, btn_Borrar, btn_inicio;
     EditText editbuscar;
     ListView listadoCategorias;
     ArrayAdapter busquedaAdapter;
@@ -42,12 +42,21 @@ public class CategoriaActivity extends AppCompatActivity {
         btn_Actualizar = findViewById(R.id.btnEditar);
         btn_Borrar = findViewById(R.id.btnBorrar);
         btn_agregar = findViewById(R.id.btnAgregar);
+        btn_inicio = findViewById(R.id.imageButtonMenuInicio);
 
         InputFilter[] editFilters = editbuscar.getFilters();
         InputFilter[] newFilters = new InputFilter[editFilters.length + 1];
         System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
         newFilters[editFilters.length] = new InputFilter.AllCaps();
         editbuscar.setFilters(newFilters);
+
+        btn_inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override

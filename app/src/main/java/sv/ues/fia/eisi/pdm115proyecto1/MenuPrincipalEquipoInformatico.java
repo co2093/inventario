@@ -28,6 +28,14 @@ public class MenuPrincipalEquipoInformatico extends AppCompatActivity {
             }
         });
 
+        btnEquipo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuEquipoInformaticoActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
 
 
     }
