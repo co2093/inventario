@@ -19,7 +19,7 @@ public class ControlDB {
     private static final String [] camposUsuario = new String[] {"nombre, contrasena, correo, rol"};
     private static final String [] camposAutor = new String[] {"id", "nombre"};
     private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
-    private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "color", "categoria", "fecha"};
+    private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "estado", "categoria", "fecha"};
     private static final String [] camposTesis = new String[] {"id_tesis", "nombre_tesis", "fecha_publicacion", "idioma", "id_autor_tesis"};
 
 
@@ -34,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve_4.s3db";
+        private static final String BASE_DATOS = "inve_5.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -50,7 +50,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE alumno (carnet VARCHAR(128) NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), contrasena VARCAHR (128), correo VARCHAR(128), rol VARCHAR(128));");
                 db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
-                db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), color VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
+                db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), estado VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
                 db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128), equipo INTEGER);");
 
@@ -278,7 +278,7 @@ public class ControlDB {
             contentValues.put("nombre", equipoInformatico.getNombreEquipo());
             contentValues.put("modelo", equipoInformatico.getModeloEquipo());
             contentValues.put("marca", equipoInformatico.getMarcaEquipo());
-            contentValues.put("color", equipoInformatico.getColorEquipo());
+            contentValues.put("estado", equipoInformatico.getEstado());
             contentValues.put("fecha", equipoInformatico.getFechaEquipoAdquisicion());
             contentValues.put("categoria", equipoInformatico.getCategoriaEquipo());
 
@@ -968,11 +968,11 @@ public class ControlDB {
                 String nombreEquipo = cursor.getString(1);
                 String modeloEquipo = cursor.getString(2);
                 String marcaEquipo = cursor.getString(3);
-                String colorEquipo = cursor.getString(4);
+                String estadoEquipo = cursor.getString(4);
                 String categoriaEquipo = cursor.getString(5);
                 String fechaEquipoAdquisicion = cursor.getString(6);
 
-                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, colorEquipo, categoriaEquipo, fechaEquipoAdquisicion);
+                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, estadoEquipo, categoriaEquipo, fechaEquipoAdquisicion);
                 lista.add(equipoInformatico);
 
             }while (cursor.moveToNext());
@@ -1174,11 +1174,11 @@ public class ControlDB {
                 String nombreEquipo = cursor.getString(1);
                 String modeloEquipo = cursor.getString(2);
                 String marcaEquipo = cursor.getString(3);
-                String colorEquipo = cursor.getString(4);
+                String estadoEquipo = cursor.getString(4);
                 String categoriaEquipo = cursor.getString(5);
                 String fechaEquipoAdquisicion = cursor.getString(6);
 
-                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, colorEquipo, categoriaEquipo, fechaEquipoAdquisicion);
+                EquipoInformatico equipoInformatico =  new EquipoInformatico(id_equipo, nombreEquipo, modeloEquipo, marcaEquipo, estadoEquipo, categoriaEquipo, fechaEquipoAdquisicion);
                 lista.add(equipoInformatico);
 
             }while (cursor.moveToNext());
@@ -1439,7 +1439,7 @@ public class ControlDB {
             contentValues.put("nombre", equipoInformatico.getNombreEquipo());
             contentValues.put("modelo", equipoInformatico.getModeloEquipo());
             contentValues.put("marca", equipoInformatico.getMarcaEquipo());
-            contentValues.put("color", equipoInformatico.getColorEquipo());
+            contentValues.put("estado", equipoInformatico.getEstado());
             contentValues.put("fecha", equipoInformatico.getFechaEquipoAdquisicion());
             contentValues.put("categoria", equipoInformatico.getCategoriaEquipo());
 

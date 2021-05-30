@@ -6,7 +6,7 @@ public class EquipoInformatico {
     private String nombreEquipo;
     private String modeloEquipo;
     private String marcaEquipo;
-    private String colorEquipo;
+    private String estado;
     private String categoriaEquipo;
     private String fechaEquipoAdquisicion;
 
@@ -14,14 +14,22 @@ public class EquipoInformatico {
     public EquipoInformatico() {
     }
 
-    public EquipoInformatico(int id_equipo, String nombreEquipo, String modeloEquipo, String marcaEquipo, String colorEquipo, String categoriaEquipo, String fechaEquipoAdquisicion) {
+    public EquipoInformatico(int id_equipo, String nombreEquipo, String modeloEquipo, String marcaEquipo, String estado, String categoriaEquipo, String fechaEquipoAdquisicion) {
         this.id_equipo = id_equipo;
         this.nombreEquipo = nombreEquipo;
         this.modeloEquipo = modeloEquipo;
         this.marcaEquipo = marcaEquipo;
-        this.colorEquipo = colorEquipo;
+        this.estado = estado;
         this.categoriaEquipo = categoriaEquipo;
         this.fechaEquipoAdquisicion = fechaEquipoAdquisicion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getId_equipo() {
@@ -56,14 +64,6 @@ public class EquipoInformatico {
         this.marcaEquipo = marcaEquipo;
     }
 
-    public String getColorEquipo() {
-        return colorEquipo;
-    }
-
-    public void setColorEquipo(String colorEquipo) {
-        this.colorEquipo = colorEquipo;
-    }
-
     public String getCategoriaEquipo() {
         return categoriaEquipo;
     }
@@ -83,6 +83,6 @@ public class EquipoInformatico {
     @Override
     public String toString(){
         return  "ID: " + id_equipo +
-                " | Nombre:" +nombreEquipo;
+                " | Nombre:" +nombreEquipo + " | Estado: " + estado;
     }
 }

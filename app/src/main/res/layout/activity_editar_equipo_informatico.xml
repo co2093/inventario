@@ -12,19 +12,20 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="360dp"
-        android:text="Color:"
+        android:text="Estado:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <EditText
-        android:id="@+id/editTextColorEquipoEdit"
+        android:id="@+id/editTextEstadoEquipoEdit"
         android:layout_width="186dp"
         android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="352dp"
         android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:enabled="false"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"

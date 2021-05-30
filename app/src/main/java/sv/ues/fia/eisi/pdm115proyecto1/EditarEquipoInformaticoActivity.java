@@ -17,7 +17,7 @@ public class EditarEquipoInformaticoActivity extends AppCompatActivity {
 
     ImageButton btnAgregar, btnRegresar;
     ControlDB helper;
-    EditText editTextID, editTextNombre, editTextModelo, editTextMarca, editTextFecha, editTextColor;
+    EditText editTextID, editTextNombre, editTextModelo, editTextMarca, editTextFecha, editTextEstado;
     Spinner spinnerCategorias;
     ArrayAdapter categoriasArrayAdapter;
 
@@ -34,7 +34,7 @@ public class EditarEquipoInformaticoActivity extends AppCompatActivity {
         spinnerCategorias = findViewById(R.id.spinnerCategoriasEquipoEdit);
         editTextModelo = findViewById(R.id.editTextModeloEquipoEdit);
         editTextMarca = findViewById(R.id.editTextMarcaEquipoEdit);
-        editTextColor = findViewById(R.id.editTextColorEquipoEdit);
+        editTextEstado = findViewById(R.id.editTextEstadoEdit);
         editTextFecha = findViewById(R.id.editTextDateEquipoEdit);
 
         llenarSpinner(helper);
@@ -52,14 +52,14 @@ public class EditarEquipoInformaticoActivity extends AppCompatActivity {
     public void actualizarEquipo(View v) {
 
 
-        if (editTextID.getText().toString().isEmpty() || editTextFecha.getText().toString().isEmpty() ||editTextNombre.getText().toString().isEmpty() || editTextColor.getText().toString().isEmpty() || editTextMarca.getText().toString().isEmpty() ||editTextModelo.getText().toString().isEmpty() || spinnerCategorias.getSelectedItem()==null) {
+        if (editTextID.getText().toString().isEmpty() || editTextFecha.getText().toString().isEmpty() ||editTextNombre.getText().toString().isEmpty() || editTextEstado.getText().toString().isEmpty() || editTextMarca.getText().toString().isEmpty() ||editTextModelo.getText().toString().isEmpty() || spinnerCategorias.getSelectedItem()==null) {
             Toast.makeText(EditarEquipoInformaticoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
         } else {
 
 
             Integer id = Integer.valueOf(editTextID.getText().toString());
             String nombre = editTextNombre.getText().toString();
-            String color = editTextColor.getText().toString();
+            String estado = editTextEstado.getText().toString();
             String marca = editTextMarca.getText().toString();
             String modelo = editTextModelo.getText().toString();
             String fecha = editTextFecha.getText().toString();
@@ -70,7 +70,7 @@ public class EditarEquipoInformaticoActivity extends AppCompatActivity {
             EquipoInformatico equipoInformatico = new EquipoInformatico();
             equipoInformatico.setId_equipo(id);
             equipoInformatico.setCategoriaEquipo(categoria);
-            equipoInformatico.setColorEquipo(color);
+            equipoInformatico.setEstado(estado);
             equipoInformatico.setMarcaEquipo(marca);
             equipoInformatico.setModeloEquipo(modelo);
             equipoInformatico.setNombreEquipo(nombre);
