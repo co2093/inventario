@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MenuTesisActivity extends AppCompatActivity {
 
-    ImageButton btnAgregarTesis, btnEditarTesis, btnActualizar;
+    ImageButton btnAgregarTesis, btnEditarTesis, btnActualizar, inicio;
     ListView listadoTesis;
     ControlDB DBhelper;
     ArrayAdapter busquedaAdapter;
@@ -36,11 +36,20 @@ public class MenuTesisActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizar);
         listadoTesis = findViewById(R.id.listado_tesis);
         editBusqueda = findViewById(R.id.editBuscarTesis);
+        inicio = findViewById(R.id.imageButtonMenuInicio);
 
         DBhelper = new ControlDB(MenuTesisActivity.this);
         List<Tesis> tesisListado = DBhelper.getTesis();
 
         listadoTesis(DBhelper);
+
+        inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         btnAgregarTesis.setOnClickListener(new View.OnClickListener() {
             @Override
