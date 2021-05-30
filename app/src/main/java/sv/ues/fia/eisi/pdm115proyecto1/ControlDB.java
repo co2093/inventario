@@ -34,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve_5.s3db";
+        private static final String BASE_DATOS = "inve_6.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -53,6 +53,14 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), estado VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
                 db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128), equipo INTEGER);");
+
+                db.execSQL("CREATE TRIGGER actualizar_estado\n" +
+                        "AFTER INSERT\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "        UPDATE equipo SET estado = \"Prestado\" WHERE equipo.id == new.equipo;\n" +
+                        "END");
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
