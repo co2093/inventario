@@ -34,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve_2.s3db";
+        private static final String BASE_DATOS = "inve_3.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -51,6 +51,8 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE usuario (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128), contrasena VARCAHR (128), correo VARCHAR(128), rol VARCHAR(128));");
                 db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
                 db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), color VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
+                db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
+                db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128));");
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
@@ -220,6 +222,24 @@ public class ControlDB {
             return "Libro agregado";
         }
 
+
+    }
+
+    public String insertar(Actividad actividad){
+
+        if(verificarIntegridad(actividad, 10)){
+            return "Ya existe una actividad con este ID";
+        }else{
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("id", actividad.getIdActividad());
+            contentValues.put("nombre", actividad.getNombreActividad());
+            contentValues.put("ubicacion", actividad.getUbicacion());
+
+            db.insert("actividad", null, contentValues);
+
+            return "Actividad agregada";
+        }
 
     }
 
@@ -568,6 +588,33 @@ public class ControlDB {
 
     }
 
+    public List<Actividad> getActividades(){
+
+        List<Actividad> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM actividad";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String ubicacion = cursor.getString(2);
+
+                Actividad actividad = new Actividad(id,nombre,ubicacion);
+                lista.add(actividad);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+
+    }
+
     public List<Libro> getLibros(){
 
         List<Libro> lista = new ArrayList<>();
@@ -830,6 +877,31 @@ public class ControlDB {
 
     }
 
+    public List<Actividad> consultaActividad(int id){
+
+        List<Actividad> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM actividad WHERE id = " + id;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id2 = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String ubicacion = cursor.getString(2);
+
+                Actividad actividad = new Actividad(id2,nombre,ubicacion);
+                lista.add(actividad);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
     public List<Autor> consulta(int idd){
         List<Autor> lista = new ArrayList<>();
 
@@ -1007,6 +1079,18 @@ public class ControlDB {
         }
     }
 
+    public boolean eliminar(Actividad actividad){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM actividad WHERE id =" + actividad.getIdActividad();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public boolean eliminar(EquipoInformatico equipoInformatico){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String queryString = "DELETE FROM equipo WHERE id =" + equipoInformatico.getId_equipo();
@@ -1084,6 +1168,24 @@ public class ControlDB {
             contentValues.put("idioma", libro.getIdioma());
 
             db.update("libro", contentValues, "isbn = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
+    public String actualizar(Actividad actividad){
+
+        if (verificarIntegridad(actividad, 10)){
+            String[] id = {String.valueOf(actividad.getIdActividad())};
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre", actividad.getNombreActividad());
+            contentValues.put("ubicacion", actividad.getUbicacion());
+
+            db.update("actividad", contentValues, "id = ?", id);
 
             return "Actualizado";
         }
@@ -1367,6 +1469,21 @@ public class ControlDB {
                 if (cursor.moveToFirst()) {
                     return true;
                 } else {
+                    return false;
+                }
+
+            }
+
+            case 10:{
+
+                Actividad actividad = (Actividad) dato;
+                String[] id = {String.valueOf(actividad.getIdActividad())};
+                abrir();
+                Cursor cursor = db.query("actividad", null, "id = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
                     return false;
                 }
 
