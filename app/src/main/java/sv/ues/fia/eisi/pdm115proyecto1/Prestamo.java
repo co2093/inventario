@@ -8,17 +8,36 @@ public class Prestamo {
     private int actividad;
     private String responsable;
     private String hora;
+    private int equipo;
 
     public Prestamo() {
     }
 
-    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, int actividad, String responsable, String hora) {
+    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, int actividad, String responsable, String hora, int equipo) {
         this.idPrestamo = idPrestamo;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.actividad = actividad;
         this.responsable = responsable;
         this.hora = hora;
+        this.equipo = equipo;
+    }
+
+    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, int actividad, String responsable, int equipo) {
+        this.idPrestamo = idPrestamo;
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
+        this.actividad = actividad;
+        this.responsable = responsable;
+        this.equipo = equipo;
+    }
+
+    public int getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(int equipo) {
+        this.equipo = equipo;
     }
 
     public int getIdPrestamo() {
@@ -67,5 +86,16 @@ public class Prestamo {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+
+    @Override
+    public String toString(){
+
+
+
+        return
+                "ID: " +idPrestamo +
+                        " | Fecha: " + fechaPrestamo + " | Resposable";
     }
 }

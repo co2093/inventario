@@ -34,7 +34,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve_3.s3db";
+        private static final String BASE_DATOS = "inve_4.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -52,7 +52,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
                 db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), color VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
-                db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128));");
+                db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128), equipo INTEGER);");
 
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
@@ -256,6 +256,7 @@ public class ControlDB {
             contentValues.put("actividad", prestamo.getActividad());
             contentValues.put("responsable", prestamo.getResponsable());
             contentValues.put("hora", prestamo.getHora());
+            contentValues.put("equipo", prestamo.getEquipo());
 
             db.insert("prestamo", null, contentValues);
 
@@ -655,9 +656,10 @@ public class ControlDB {
                 int actividad = cursor.getInt(3);
                 String responsable = cursor.getString(4);
                 String hora = cursor.getString(5);
+                int equipo = cursor.getInt(6);
 
 
-                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora);
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora, equipo);
                 lista.add(prestamo);
             }while (cursor.moveToNext());
         }else {
@@ -821,6 +823,82 @@ public class ControlDB {
         return lista;
     }
 
+    public List<String> getDocentesNombre(){
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM docente";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String id = cursor.getString(1);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Integer> getActividadesID(){
+        List<Integer> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM actividad";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Integer> getEquipoID(){
+        List<Integer> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM equipo";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+
     public List<String> getRoles(){
 
         List<String> lista = new ArrayList<>();
@@ -974,9 +1052,10 @@ public class ControlDB {
                 int actividad = cursor.getInt(3);
                 String responsable = cursor.getString(4);
                 String hora = cursor.getString(5);
+                int equipo = cursor.getInt(6);
 
 
-                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora);
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora, equipo);
                 lista.add(prestamo);
             }while (cursor.moveToNext());
         }else {
@@ -1305,6 +1384,7 @@ public class ControlDB {
             contentValues.put("actividad", prestamo.getActividad());
             contentValues.put("responsable", prestamo.getResponsable());
             contentValues.put("hora", prestamo.getHora());
+            contentValues.put("equipo", prestamo.getEquipo());
 
             db.update("prestamo", contentValues, "id = ?", id);
 
