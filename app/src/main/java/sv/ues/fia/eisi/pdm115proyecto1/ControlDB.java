@@ -62,6 +62,14 @@ public class ControlDB {
                         "        UPDATE equipo SET estado = \"Prestado\" WHERE equipo.id == new.equipo;\n" +
                         "END");
 
+                db.execSQL("CREATE TRIGGER actualizar_estado2\n" +
+                        "AFTER DELETE\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "        UPDATE equipo SET estado = \"Disponible\" WHERE equipo.id == old.equipo;\n" +
+                        "END");
+
                 //Damaris
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
                 db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
