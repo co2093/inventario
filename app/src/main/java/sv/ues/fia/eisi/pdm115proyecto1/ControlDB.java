@@ -884,11 +884,13 @@ public class ControlDB {
     public List<Integer> getEquipoID(){
         List<Integer> lista = new ArrayList<>();
 
-        String queryString = "SELECT * FROM equipo";
-
         SQLiteDatabase db = DBHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(queryString, null);
+        String es = "Disponible";
+
+        String[] carnetd = {es};
+
+        Cursor cursor = db.query("equipo", camposEquipo, "estado = ?", carnetd, null,null,null);
 
         if(cursor.moveToFirst()){
             do {
