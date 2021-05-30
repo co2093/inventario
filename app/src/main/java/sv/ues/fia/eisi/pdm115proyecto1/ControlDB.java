@@ -243,6 +243,29 @@ public class ControlDB {
 
     }
 
+    public String insertar(Prestamo prestamo){
+
+        if(verificarIntegridad(prestamo, 11)){
+            return "Ya existe una prestamo con este ID";
+        }else{
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("id", prestamo.getIdPrestamo());
+            contentValues.put("fecha_prestamo", prestamo.getFechaPrestamo());
+            contentValues.put("fecha_devolucion", prestamo.getFechaDevolucion());
+            contentValues.put("actividad", prestamo.getActividad());
+            contentValues.put("responsable", prestamo.getResponsable());
+            contentValues.put("hora", prestamo.getHora());
+
+            db.insert("prestamo", null, contentValues);
+
+            return "Prestamo agregada";
+        }
+
+    }
+
+
+
     public String insertar(EquipoInformatico equipoInformatico){
 
         if(verificarIntegridad(equipoInformatico,7)){
@@ -615,6 +638,40 @@ public class ControlDB {
 
     }
 
+    public List<Prestamo> getPrestamo(){
+
+        List<Prestamo> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM prestamo";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+
+                int idPrestamo = cursor.getInt(0);
+                String fechaPrestamo = cursor.getString(1);
+                String fechaDevolucion = cursor.getString(2);
+                int actividad = cursor.getInt(3);
+                String responsable = cursor.getString(4);
+                String hora = cursor.getString(5);
+
+
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora);
+                lista.add(prestamo);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+
+    }
+
+
+
     public List<Libro> getLibros(){
 
         List<Libro> lista = new ArrayList<>();
@@ -902,6 +959,35 @@ public class ControlDB {
 
     }
 
+    public List<Prestamo> consultaPrestamos(int id){
+
+        List<Prestamo> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM prestamo WHERE id = " + id;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int idPrestamo = cursor.getInt(0);
+                String fechaPrestamo = cursor.getString(1);
+                String fechaDevolucion = cursor.getString(2);
+                int actividad = cursor.getInt(3);
+                String responsable = cursor.getString(4);
+                String hora = cursor.getString(5);
+
+
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora);
+                lista.add(prestamo);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
     public List<Autor> consulta(int idd){
         List<Autor> lista = new ArrayList<>();
 
@@ -1091,6 +1177,18 @@ public class ControlDB {
         }
     }
 
+    public boolean eliminar(Prestamo prestamo){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM prestamo WHERE id =" + prestamo.getIdPrestamo();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public boolean eliminar(EquipoInformatico equipoInformatico){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String queryString = "DELETE FROM equipo WHERE id =" + equipoInformatico.getId_equipo();
@@ -1186,6 +1284,29 @@ public class ControlDB {
             contentValues.put("ubicacion", actividad.getUbicacion());
 
             db.update("actividad", contentValues, "id = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
+    public String actualizar(Prestamo prestamo){
+
+        if (verificarIntegridad(prestamo, 11)){
+
+            String[] id = {String.valueOf(prestamo.getIdPrestamo())};
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("fecha_prestamo", prestamo.getFechaPrestamo());
+            contentValues.put("fecha_devolucion", prestamo.getFechaDevolucion());
+            contentValues.put("actividad", prestamo.getActividad());
+            contentValues.put("responsable", prestamo.getResponsable());
+            contentValues.put("hora", prestamo.getHora());
+
+            db.update("prestamo", contentValues, "id = ?", id);
 
             return "Actualizado";
         }
@@ -1486,6 +1607,22 @@ public class ControlDB {
                 }else {
                     return false;
                 }
+
+            }
+
+            case 11:{
+
+                Prestamo prestamo = (Prestamo) dato;
+                String [] id =  {String.valueOf(prestamo.getIdPrestamo())};
+                abrir();
+                Cursor cursor = db.query("prestamo", null, "id = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
 
             }
 
