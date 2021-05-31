@@ -511,15 +511,27 @@ public class ControlDB {
     }
 
     public boolean eliminar(Categoria categoria){
-        SQLiteDatabase db = DBHelper.getWritableDatabase();
-        String queryString = "DELETE FROM categoria WHERE id_categoria = " + categoria.getId_categoria();
-        Cursor cursor = db.rawQuery(queryString, null);
 
-        if (cursor.moveToFirst()){
-            return true;
-        }else {
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        String carnet = categoria.getNombre_categoria();
+        String[] carnetd = {carnet};
+
+        Cursor cursor = db.query("equipo", camposEquipo, "categoria = ?", carnetd, null,null,null);
+
+        if(cursor.moveToFirst()){
             return false;
+        }else {
+            SQLiteDatabase db2 = DBHelper.getWritableDatabase();
+            String queryString2 = "DELETE FROM categoria WHERE id_categoria = " + categoria.getId_categoria();
+            Cursor cursor2 = db2.rawQuery(queryString2, null);
+
+            if (cursor2.moveToFirst()){
+                return true;
+            }else {
+                return false;
+            }
         }
+
     }
 
     public List<Categoria> consultaCategoria(String id_categoria){
@@ -1681,7 +1693,7 @@ public class ControlDB {
         SQLiteDatabase db = DBHelper.getReadableDatabase();
 
         String adm = "Administrador";
-        String sec = "Secreataria";
+        String sec = "Secretaria";
 
         Cursor c = db.rawQuery("select * from usuario where correo = ? AND contrasena = ?", correo1);
 

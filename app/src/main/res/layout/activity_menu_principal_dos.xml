@@ -59,24 +59,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuInventario"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:text="Inventario" />
-        </TableRow>
+            android:layout_height="match_parent"/>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuEventos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eventos" />
-        </TableRow>
+            android:layout_height="match_parent"/>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

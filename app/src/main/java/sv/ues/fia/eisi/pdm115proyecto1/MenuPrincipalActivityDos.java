@@ -44,21 +44,8 @@ public class MenuPrincipalActivityDos extends AppCompatActivity {
         });
 
 
-        btnMenuPrincipalInventario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MenuPrincipalInventario.class);
-                startActivityForResult(intent, 0);
-            }
-        });
 
-        btnMenuPrincipalEvento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MenuPrincipalEvento.class);
-                startActivityForResult(intent, 0);
-            }
-        });
+
 
 
     }

@@ -103,7 +103,7 @@ public class CategoriaActivity extends AppCompatActivity {
                         DBHelper.eliminar(categoria);
                         listadoCategoria(DBHelper);
 
-                        Toast.makeText(CategoriaActivity.this, "Eliminado " + categoria.getNombre_categoria(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoriaActivity.this, "Operacion completada " + categoria.getNombre_categoria(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
