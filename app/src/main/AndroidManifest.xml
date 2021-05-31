@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".PrestamosAlumnoActivity"></activity>
-        <activity android:name=".PrestamosDocenteActivity" />
+        <activity android:name=".MenuControlFisicoActivity"></activity>
         <activity android:name=".MenuPrestamoActivity" />
         <activity android:name=".EditarPrestamoActivity" />
         <activity android:name=".AgregarPrestamoActivity" />

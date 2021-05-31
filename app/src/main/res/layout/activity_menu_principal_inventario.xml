@@ -57,25 +57,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuSustitucion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sustitucion" />
-        </TableRow>
+            android:layout_height="match_parent"/>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuControlDescargo"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:text="Descargo" />
-        </TableRow>
+            android:layout_height="match_parent"/>
 
         <TableRow
             android:layout_width="match_parent"

@@ -21,6 +21,7 @@ public class ControlDB {
     private static final String [] camposAlumno = new String[] {"carnet", "nombre", "apellido"};
     private static final String [] camposEquipo = new String[] {"id", "nombre", "modelo", "marca", "estado", "categoria", "fecha"};
     private static final String [] camposTesis = new String[] {"id_tesis", "nombre_tesis", "fecha_publicacion", "idioma", "id_autor_tesis"};
+    private static final String [] camposControl = new String[] {"id", "categoria", "existencias", "prestamos"};
 
 
     private final Context context;
@@ -34,7 +35,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "inve_6.s3db";
+        private static final String BASE_DATOS = "proyecto1_inv.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -53,7 +54,19 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), estado VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
                 db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128), equipo INTEGER);");
+                db.execSQL("CREATE TABLE control_fisico (id INTEGER PRIMARY KEY AUTOINCREMENT, categoria VARCHAR (128), existencias INTEGER, prestamos INTEGER);");
 
+
+
+                //Damaris
+                db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
+                db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
+                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256), fecha_publicacion VARCHAR(128),idioma VARCHAR(128),id_autor_tesis VARCHAR);");
+
+                //Francisco
+                db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
+
+                //Triggers
                 db.execSQL("CREATE TRIGGER actualizar_estado\n" +
                         "AFTER INSERT\n" +
                         "ON prestamo \n" +
@@ -70,13 +83,15 @@ public class ControlDB {
                         "        UPDATE equipo SET estado = \"Disponible\" WHERE equipo.id == old.equipo;\n" +
                         "END");
 
-                //Damaris
-                db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
-                db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
-                db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256), fecha_publicacion VARCHAR(128),idioma VARCHAR(128),id_autor_tesis VARCHAR);");
-
-                //Francisco
-                db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
+                db.execSQL("CREATE TRIGGER control_fisico_uno\n" +
+                        "AFTER INSERT\n" +
+                        "ON categoria \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN\n" +
+                        " \n" +
+                        "        INSERT INTO control_fisico (categoria, existencias, prestamos) VALUES(new.nombre_categoria, 0,0);\n" +
+                        "\n" +
+                        "END");
 
 
             }catch (SQLException e){
@@ -428,7 +443,7 @@ public class ControlDB {
     public String insertar(Categoria categoria){
 
         if(verificarIntegridad(categoria,4)){
-            return "Ya existe una categoria con ese ID";
+            return "Ya existe una categoria con ese nombre";
         }else{
             String regInsertados="Registro Insertado Nº= ";
             long contador=0;
@@ -652,6 +667,34 @@ public class ControlDB {
         db.close();
         return lista;
 
+
+    }
+
+    public List<ControlFisico> getControlFisico(){
+
+        List<ControlFisico> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM control_fisico";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String categoria = cursor.getString(1);
+                int existencias = cursor.getInt(2);
+                int prestamos = cursor.getInt(3);
+
+
+                ControlFisico controlFisico = new ControlFisico(id,categoria,existencias, prestamos);
+                lista.add(controlFisico);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
 
     }
 
@@ -1177,6 +1220,45 @@ public class ControlDB {
 
     }
 
+    public List<ControlFisico> consultaControlFisico(String carnet){
+        List<ControlFisico> lista = new ArrayList<>();
+
+        // String queryString = "SELECT * FROM alumno WHERE carnet = " + carnet ;
+
+
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        //Cursor cursor = db.rawQuery(queryString, null);
+
+        String[] carnetd = {carnet};
+
+        Cursor cursor = db.query("control_fisico", camposControl, "categoria = ?", carnetd, null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+
+                    int id = cursor.getInt(0);
+                    String categoria = cursor.getString(1);
+                    int existencias = cursor.getInt(2);
+                    int prestamos = cursor.getInt(3);
+
+
+                    ControlFisico controlFisico = new ControlFisico(id,categoria,existencias, prestamos);
+                    lista.add(controlFisico);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
+
     public List<EquipoInformatico> consultaEquipo(String nombre){
         List<EquipoInformatico> lista = new ArrayList<>();
 
@@ -1608,7 +1690,7 @@ public class ControlDB {
 
             case 4:{
                 Categoria categoria = (Categoria) dato;
-                String []id = {String.valueOf(categoria.getId_categoria())};
+                String []id = {String.valueOf(categoria.getNombre_categoria())};
                 abrir();
                 Cursor cursor = db.query("categoria",null,"id_categoria =?",id,null,null,null);
                 if (cursor.moveToFirst()){

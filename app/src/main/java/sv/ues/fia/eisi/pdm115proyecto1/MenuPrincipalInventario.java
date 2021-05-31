@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MenuPrincipalInventario extends AppCompatActivity {
 
-    Button btnTraslado, btnPrestamo;
+    Button btnTraslado, btnPrestamo, btnControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,15 @@ public class MenuPrincipalInventario extends AppCompatActivity {
 
         btnTraslado = findViewById(R.id.btnMenuTraslados);
         btnPrestamo = findViewById(R.id.btnMenuPrestamos);
+        btnControl = findViewById(R.id.btnMenuControlFisico);
+
+        btnControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuControlFisicoActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         btnPrestamo.setOnClickListener(new View.OnClickListener() {
             @Override
