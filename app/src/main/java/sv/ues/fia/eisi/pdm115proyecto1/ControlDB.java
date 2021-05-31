@@ -35,7 +35,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "proyecto1_inv4.s3db";
+        private static final String BASE_DATOS = "proyecto1_vfinal.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -122,7 +122,7 @@ public class ControlDB {
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
                         "BEGIN \n" +
-                        "        UPDATE control_fisico SET disponibles = disponibles-1 WHERE control_fisico.categoria == new.categoria;\n" +
+                        "        UPDATE control_fisico SET existencias = existencias -1 WHERE control_fisico.categoria == new.categoria;\n" +
                         "END");
 
                 db.execSQL("CREATE TRIGGER actualizar_control_cinco\n" +
@@ -130,7 +130,15 @@ public class ControlDB {
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
                         "BEGIN \n" +
-                        "      UPDATE control_fisico SET disponibles = disponibles+1 WHERE control_fisico.categoria == old.categoria;\n" +
+                        "      UPDATE control_fisico SET existencias = existencias+1 WHERE control_fisico.categoria == old.categoria;\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control_seis\n" +
+                        "AFTER DELETE\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "      UPDATE control_fisico SET prestamos = prestamos-1 WHERE control_fisico.categoria == old.categoria;\n" +
                         "END");
 
 
