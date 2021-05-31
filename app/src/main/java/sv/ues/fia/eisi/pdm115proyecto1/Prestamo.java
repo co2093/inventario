@@ -7,19 +7,19 @@ public class Prestamo {
     private String fechaDevolucion;
     private int actividad;
     private String responsable;
-    private String hora;
+    private String categoriaPrestamo;
     private int equipo;
 
     public Prestamo() {
     }
 
-    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, int actividad, String responsable, String hora, int equipo) {
+    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, int actividad, String responsable, String categoriaPrestamo, int equipo) {
         this.idPrestamo = idPrestamo;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.actividad = actividad;
         this.responsable = responsable;
-        this.hora = hora;
+        this.categoriaPrestamo = categoriaPrestamo;
         this.equipo = equipo;
     }
 
@@ -80,14 +80,13 @@ public class Prestamo {
         this.responsable = responsable;
     }
 
-    public String getHora() {
-        return hora;
+    public String getCategoriaPrestamo() {
+        return categoriaPrestamo;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setCategoriaPrestamo(String categoriaPrestamo) {
+        this.categoriaPrestamo = categoriaPrestamo;
     }
-
 
     @Override
     public String toString(){
@@ -96,6 +95,6 @@ public class Prestamo {
 
         return
                 "ID: " +idPrestamo +
-                        " | Fecha: " + fechaPrestamo + " | Resposable";
+                        " | Equipo: " + equipo + " | Cat: " + categoriaPrestamo;
     }
 }

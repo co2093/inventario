@@ -35,7 +35,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "proyecto1_inv.s3db";
+        private static final String BASE_DATOS = "proyecto1_inv4.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -53,7 +53,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE rol (id INTEGER PRIMARY KEY, nombre VARCHAR (128))");
                 db.execSQL("CREATE TABLE equipo (id INTEGER PRIMARY KEY, nombre VARCHAR (128), modelo VARCHAR (128), marca VARCHAR (128), estado VARCHAR (128), categoria VARCHAR (128), fecha VARCHAR (128))");
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
-                db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), hora VARCHAR (128), equipo INTEGER);");
+                db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), categoria VARCHAR (128), equipo INTEGER);");
                 db.execSQL("CREATE TABLE control_fisico (id INTEGER PRIMARY KEY AUTOINCREMENT, categoria VARCHAR (128), existencias INTEGER, prestamos INTEGER);");
 
 
@@ -91,6 +91,46 @@ public class ControlDB {
                         " \n" +
                         "        INSERT INTO control_fisico (categoria, existencias, prestamos) VALUES(new.nombre_categoria, 0,0);\n" +
                         "\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control\n" +
+                        "AFTER INSERT\n" +
+                        "ON equipo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "        UPDATE control_fisico SET existencias = existencias+1 WHERE new.categoria == control_fisico.categoria;\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control_dos\n" +
+                        "AFTER DELETE\n" +
+                        "ON equipo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "     UPDATE control_fisico SET existencias = existencias-1 WHERE old.categoria == control_fisico.categoria;\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control_tres\n" +
+                        "AFTER INSERT\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "        UPDATE control_fisico SET prestamos = prestamos+1 WHERE control_fisico.categoria == new.categoria;\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control_cuatro\n" +
+                        "AFTER INSERT\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "        UPDATE control_fisico SET disponibles = disponibles-1 WHERE control_fisico.categoria == new.categoria;\n" +
+                        "END");
+
+                db.execSQL("CREATE TRIGGER actualizar_control_cinco\n" +
+                        "AFTER DELETE\n" +
+                        "ON prestamo \n" +
+                        "FOR EACH ROW\n" +
+                        "BEGIN \n" +
+                        "      UPDATE control_fisico SET disponibles = disponibles+1 WHERE control_fisico.categoria == old.categoria;\n" +
                         "END");
 
 
@@ -286,7 +326,7 @@ public class ControlDB {
             contentValues.put("fecha_devolucion", prestamo.getFechaDevolucion());
             contentValues.put("actividad", prestamo.getActividad());
             contentValues.put("responsable", prestamo.getResponsable());
-            contentValues.put("hora", prestamo.getHora());
+            contentValues.put("categoria", prestamo.getCategoriaPrestamo());
             contentValues.put("equipo", prestamo.getEquipo());
 
             db.insert("prestamo", null, contentValues);
@@ -544,6 +584,27 @@ public class ControlDB {
         return lista;
     }
 
+    public String getCategoriaEquipo(int equipo){
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        String nombre = "";
+
+        String queryString = "SELECT * FROM equipo WHERE id = " + equipo;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+                nombre = cursor.getString(5);
+
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return nombre;
+
+
+    }
+
 
 
 
@@ -714,11 +775,11 @@ public class ControlDB {
                 String fechaDevolucion = cursor.getString(2);
                 int actividad = cursor.getInt(3);
                 String responsable = cursor.getString(4);
-                String hora = cursor.getString(5);
+                String categoria = cursor.getString(5);
                 int equipo = cursor.getInt(6);
 
 
-                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora, equipo);
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, categoria, equipo);
                 lista.add(prestamo);
             }while (cursor.moveToNext());
         }else {
@@ -1112,11 +1173,11 @@ public class ControlDB {
                 String fechaDevolucion = cursor.getString(2);
                 int actividad = cursor.getInt(3);
                 String responsable = cursor.getString(4);
-                String hora = cursor.getString(5);
+                String categoria = cursor.getString(5);
                 int equipo = cursor.getInt(6);
 
 
-                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, hora, equipo);
+                Prestamo prestamo = new Prestamo(idPrestamo,fechaPrestamo,fechaDevolucion, actividad, responsable, categoria, equipo);
                 lista.add(prestamo);
             }while (cursor.moveToNext());
         }else {
@@ -1483,7 +1544,7 @@ public class ControlDB {
             contentValues.put("fecha_devolucion", prestamo.getFechaDevolucion());
             contentValues.put("actividad", prestamo.getActividad());
             contentValues.put("responsable", prestamo.getResponsable());
-            contentValues.put("hora", prestamo.getHora());
+            contentValues.put("categoria", prestamo.getCategoriaPrestamo());
             contentValues.put("equipo", prestamo.getEquipo());
 
             db.update("prestamo", contentValues, "id = ?", id);

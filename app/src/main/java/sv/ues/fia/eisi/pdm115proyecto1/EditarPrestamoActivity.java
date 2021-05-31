@@ -64,7 +64,10 @@ public class EditarPrestamoActivity extends AppCompatActivity {
             Integer equipo = Integer.valueOf(spinnerEquipo.getSelectedItem().toString());
             String devolucion = editTextDevolucion.getText().toString();
             String responsable = spinnerDocentes.getSelectedItem().toString();
+            String categoria = "";
             String regInsertados;
+
+            categoria = helper.getCategoriaEquipo(equipo);
 
             Prestamo prestamo1 = new Prestamo();
             prestamo1.setIdPrestamo(id);
@@ -73,6 +76,7 @@ public class EditarPrestamoActivity extends AppCompatActivity {
             prestamo1.setResponsable(responsable);
             prestamo1.setEquipo(equipo);
             prestamo1.setActividad(actividad);
+            prestamo1.setCategoriaPrestamo(categoria);
 
             helper.abrir();
             regInsertados = helper.actualizar(prestamo1);
