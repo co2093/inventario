@@ -87,51 +87,6 @@ public class Controlador {
         return respuesta;
     }
 
-    public static List<Docente> obtenerDocentesLocal(String json, Context ctx) {
-        List<Docente> listaDocente = new ArrayList<Docente>();
-        try {
-            JSONArray materiasJSON = new JSONArray(json);
-            for (int i = 0; i < materiasJSON.length(); i++) {
-                JSONObject obj = materiasJSON.getJSONObject(i);
-                Docente docente = new Docente();
-                docente.setId(obj.getInt("id"));
-                docente.setNombre(obj.getString("nombre"));
-                docente.setApellido(obj.getString("apellido"));
-                listaDocente.add(docente);
-            }
-            return listaDocente;
-        } catch (Exception e) {
-            Toast.makeText(ctx, "Error en parseO de JSON", Toast.LENGTH_LONG).show();
-            return null;
-        }
-    }
-
-    public static List<Docente> obtenerDocentesExterno(String json, Context ctx) {
-
-        List<Docente> listaDocente = new ArrayList<Docente>();
-
-        try {
-            JSONArray materiasJSON = new JSONArray(json);
-            for (int i = 0; i < materiasJSON.length(); i++) {
-                JSONObject obj = materiasJSON.getJSONObject(i);
-
-                Docente docente = new Docente();
-                docente.setId(obj.getInt("id"));
-                docente.setNombre(obj.getString("nombre"));
-                docente.setApellido(obj.getString("apellido"));
-                listaDocente.add(docente);
-            }
-            return listaDocente;
-        } catch (Exception e) {
-            Toast.makeText(ctx, "Error en parseOO de JSON", Toast.LENGTH_LONG)
-                    .show();
-            return null;
-        }
-    }
-
-
-
-
     public static void insertarDocenteExterno(String peticion, Context ctx) {
 
         String json = obtenerRespuestaPeticion(peticion, ctx);
@@ -150,6 +105,23 @@ public class Controlador {
         }
     }
 
+    public static void insertarAlumnoExternoDos(String peticion, Context ctx) {
+
+        String json = obtenerRespuestaPeticion(peticion, ctx);
+        try {
+
+            JSONObject resultado = new JSONObject(json);
+
+            Toast.makeText(ctx, "Registro ingresado"+ resultado.getJSONArray("resultado").toString(), Toast.LENGTH_LONG).show();
+            int respuesta = resultado.getInt("resultado");
+            if (respuesta == 1)
+                Toast.makeText(ctx, "Registro ingresado", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(ctx, "Error registro duplicado", Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
