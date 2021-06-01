@@ -70,9 +70,13 @@ public class ServiciosWebActualizarAutor extends AppCompatActivity {
 
     public void servicioPHP(View v) {
 
-        String id = buscador.getText().toString();
+        if (buscador.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Ingrese ID a buscar", Toast.LENGTH_SHORT).show();
+        } else{
+
+            String id = buscador.getText().toString();
         String url = "";
-        switch(v.getId()) {
+        switch (v.getId()) {
 
             case R.id.buttonConsultar:
                 // it was the second button
@@ -87,6 +91,7 @@ public class ServiciosWebActualizarAutor extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
     }
 
 

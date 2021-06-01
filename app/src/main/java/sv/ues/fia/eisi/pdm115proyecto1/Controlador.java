@@ -199,6 +199,28 @@ public class Controlador {
         }
     }
 
+    public static List<Docente> obtenerDocenteExterno(String json, Context ctx) {
+
+        List<Docente> listDocente = new ArrayList<Docente>();
+
+        try {
+            JSONArray materiasJSON = new JSONArray(json);
+            for (int i = 0; i < materiasJSON.length(); i++) {
+                JSONObject obj = materiasJSON.getJSONObject(i);
+                Docente docente = new Docente();
+                docente.setId(obj.getInt("id"));
+                docente.setNombre(obj.getString("nombre"));
+                docente.setApellido(obj.getString("apellido"));
+                listDocente.add(docente);
+            }
+            return listDocente;
+        } catch (Exception e) {
+            Toast.makeText(ctx, "Error en parseOO de JSON", Toast.LENGTH_LONG)
+                    .show();
+            return null;
+        }
+    }
+
 
 
 

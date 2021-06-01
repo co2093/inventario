@@ -127,5 +127,17 @@
                 android:text="Actualizar  Docentes" />
         </TableRow>
 
+        <ImageButton
+            android:id="@+id/imageButtonMenuInicio"
+            android:layout_width="74dp"
+            android:layout_height="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.866"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

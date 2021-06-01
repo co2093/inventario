@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MenuServiciosWeb extends AppCompatActivity {
 
@@ -14,6 +15,7 @@ public class MenuServiciosWeb extends AppCompatActivity {
     Button librosServices;
     Button alumnosServices;
     Button docentesServides;
+    ImageButton inicio;
     Button actualizarDocentes, actualizarLibros, actualizarAutores;
     
 
@@ -31,6 +33,15 @@ public class MenuServiciosWeb extends AppCompatActivity {
         actualizarAutores = findViewById(R.id.btnMenuActualizarAutorSW);
         actualizarDocentes = findViewById(R.id.btnActualizarDocenteSW);
         actualizarLibros = findViewById(R.id.btnActualizarLibroSW);
+        inicio = findViewById(R.id.imageButtonMenuInicio);
+
+        inicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuPrincipalActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
 
         actualizarLibros.setOnClickListener(new View.OnClickListener() {
             @Override
