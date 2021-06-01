@@ -17,6 +17,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     Button btnMenuPrincipalPersonas;
     Button btnMenuPrincipalInventario;
     Button btnMenuPrincipalEvento;
+    Button btnWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,16 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         btnMenuPrincipalPersonas = findViewById(R.id.btnMenuPersonas);
         btnMenuPrincipalInventario = findViewById(R.id.btnMenuInventario);
         btnMenuPrincipalEvento = findViewById(R.id.btnMenuEventos);
+        btnWeb = findViewById(R.id.btnMenuServiciosWeb);
+
+        btnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuServiciosWeb.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
 
         btnMenuPrincipalEquipo.setOnClickListener(new View.OnClickListener() {
             @Override

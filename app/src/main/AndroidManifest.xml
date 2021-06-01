@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sv.ues.fia.eisi.pdm115proyecto1">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".MenuControlFisicoActivity"></activity>
+        <activity android:name=".ServiciosWebDocentesActivity"></activity>
+        <activity android:name=".ServiciosWebAlumnoActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".ServiciosWebAutoresActivity" />
+        <activity android:name=".ServiciosWebLibrosActivity" />
+        <activity android:name=".ServiciosWebEquipoActivity" />
+        <activity android:name=".MenuServiciosWeb" />
+        <activity android:name=".MenuControlFisicoActivity" />
         <activity android:name=".MenuPrestamoActivity" />
         <activity android:name=".EditarPrestamoActivity" />
         <activity android:name=".AgregarPrestamoActivity" />

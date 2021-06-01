@@ -23,12 +23,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU  INVENTARIO"
+                android:text="SERVICIOS WEB"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_horizontal" />
         </TableRow>
 
         <TableRow
@@ -36,7 +37,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuEquipo"
+                android:id="@+id/btnMenuEquipoSW"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Equipo Informatico" />
@@ -49,32 +50,25 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuDocumentos"
+                android:id="@+id/btnMenuDocumentosSW"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documentos" />
+                android:text="Libros" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuPersonas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Personas" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuInventario"
+                android:id="@+id/btnMenuAlumnosSW"
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Inventario" />
+                android:text="Alumnos" />
         </TableRow>
 
         <TableRow
@@ -82,10 +76,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuEventos"
-                android:layout_width="match_parent"
+                android:id="@+id/btnMenuDocentesSW"
+                android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Eventos" />
+                android:text="Docentes" />
         </TableRow>
 
         <TableRow
@@ -93,12 +87,22 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnMenuServiciosWeb"
-                android:layout_width="match_parent"
+                android:id="@+id/btnMenuTesisSW"
+                android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="SERVICIOS WEB" />
+                android:text="Tesis" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnMenuAutoresSW"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:text="Autores" />
+        </TableRow>
 
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
