@@ -62,10 +62,11 @@
             android:layout_marginLeft="29dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1"
+            android:onClick="guardarL"
             android:background="@drawable/btn_agregar" />
 
         <ImageButton
-            android:id="@+id/btnActualizarAcSW"
+            android:id="@+id/btnActualizarDocSW"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
@@ -93,7 +94,7 @@
             android:id="@+id/textBorrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnActualizarAcSW"
+            android:layout_below="@+id/btnActualizarDocSW"
             android:layout_marginStart="162dp"
             android:layout_marginLeft="162dp"
             android:layout_marginTop="4dp"
@@ -104,7 +105,7 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/editBuscarLibroSW"
+        android:id="@+id/editBuscarDocSW"
         android:layout_width="332dp"
         android:layout_height="39dp"
         android:layout_marginStart="16dp"
@@ -115,7 +116,8 @@
         android:ems="10"
         android:maxLength="7"
         android:inputType="number"
-        android:hint="Buscar por Autor..."
+        android:hint="Buscar por ID..."
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -132,10 +134,10 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBuscarLibroSW">
+        app:layout_constraintTop_toBottomOf="@+id/editBuscarDocSW">
 
         <ListView
-            android:id="@+id/listado_LibroSW"
+            android:id="@+id/listado_libroSW"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="70dp"
@@ -143,7 +145,22 @@
             android:numColumns="auto_fit" />
 
 
+
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonConsultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="servicioPHP"
+        android:text="Consultar"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonMenuInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.59" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

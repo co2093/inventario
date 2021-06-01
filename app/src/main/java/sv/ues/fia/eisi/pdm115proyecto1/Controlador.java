@@ -221,6 +221,31 @@ public class Controlador {
         }
     }
 
+    public static List<Libro> obtenerLibroExterno(String json, Context ctx) {
+
+        List<Libro> listaLibro = new ArrayList<Libro>();
+
+        try {
+            JSONArray materiasJSON = new JSONArray(json);
+            for (int i = 0; i < materiasJSON.length(); i++) {
+                JSONObject obj = materiasJSON.getJSONObject(i);
+                Libro libro = new Libro();
+                libro.setIsbn(obj.getInt("isbn"));
+                libro.setNombreLibro(obj.getString("nombre_libro"));
+                libro.setAutorId(obj.getInt("autor"));
+                libro.setEjemplar(obj.getInt("ejemplar"));
+                libro.setEditorial(obj.getString("editorial"));
+                libro.setIdioma(obj.getString("idioma"));
+                listaLibro.add(libro);
+            }
+            return listaLibro;
+        } catch (Exception e) {
+            Toast.makeText(ctx, "Error en parseOO de JSON", Toast.LENGTH_LONG)
+                    .show();
+            return null;
+        }
+    }
+
 
 
 
