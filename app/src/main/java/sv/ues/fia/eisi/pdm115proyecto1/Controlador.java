@@ -178,6 +178,28 @@ public class Controlador {
     }
 
 
+    public static List<Autor> obtenerAutorExterno(String json, Context ctx) {
+
+        List<Autor> listAutor = new ArrayList<Autor>();
+
+        try {
+            JSONArray materiasJSON = new JSONArray(json);
+            for (int i = 0; i < materiasJSON.length(); i++) {
+                JSONObject obj = materiasJSON.getJSONObject(i);
+                Autor autor = new Autor();
+                autor.setId(obj.getInt("id"));
+                autor.setNombreAutor(obj.getString("nombre"));
+                listAutor.add(autor);
+            }
+            return listAutor;
+        } catch (Exception e) {
+            Toast.makeText(ctx, "Error en parseOO de JSON", Toast.LENGTH_LONG)
+                    .show();
+            return null;
+        }
+    }
+
+
 
 
 

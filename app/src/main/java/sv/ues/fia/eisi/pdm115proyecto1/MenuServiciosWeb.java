@@ -14,6 +14,7 @@ public class MenuServiciosWeb extends AppCompatActivity {
     Button librosServices;
     Button alumnosServices;
     Button docentesServides;
+    Button actualizarDocentes, actualizarLibros, actualizarAutores;
     
 
 
@@ -27,6 +28,34 @@ public class MenuServiciosWeb extends AppCompatActivity {
         librosServices = findViewById(R.id.btnMenuDocumentosSW);
         alumnosServices = findViewById(R.id.btnMenuAlumnosSW);
         docentesServides = findViewById(R.id.btnMenuDocentesSW);
+        actualizarAutores = findViewById(R.id.btnMenuActualizarAutorSW);
+        actualizarDocentes = findViewById(R.id.btnActualizarDocenteSW);
+        actualizarLibros = findViewById(R.id.btnActualizarLibroSW);
+
+        actualizarLibros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ServiciosWebActualizarLibro.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        actualizarDocentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ServiciosWebActualizarDocente.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
+        actualizarAutores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ServiciosWebActualizarAutor.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
 
         alumnosServices.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -82,16 +82,6 @@
                 android:text="Docentes" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMenuTesisSW"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:text="Tesis" />
-        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -102,6 +92,39 @@
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
                 android:text="Autores" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnMenuActualizarAutorSW"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:text="Actualizar  Autor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnActualizarLibroSW"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:text="Actualizar  Libro" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnActualizarDocenteSW"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:text="Actualizar  Docentes" />
         </TableRow>
 
     </TableLayout>
