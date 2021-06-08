@@ -963,6 +963,31 @@ public class ControlDB {
         return lista;
     }
 
+    public List<Integer> getRazonID(){
+        List<Integer> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM razon";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(0);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
     public List<String> getDocentesNombre(){
         List<String> lista = new ArrayList<>();
 

@@ -3,6 +3,7 @@ package sv.ues.fia.eisi.pdm115proyecto1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -18,7 +19,9 @@ public class EnviarTrasladoActivity extends AppCompatActivity {
     EditText descripcion;
     EditText fecha;
     EditText estadoE;
-    EditText equipo;
+
+    Spinner spinnerEquipo;
+    ArrayAdapter  equipoArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceStace){
@@ -29,13 +32,15 @@ public class EnviarTrasladoActivity extends AppCompatActivity {
         nombre = findViewById(R.id.editTextNombreRazon);
         descripcion = findViewById(R.id.editTextDescripcion);
         fecha = findViewById(R.id.editTextFecha);
-        equipo = findViewById(R.id.editTextEquipo);
+
+        spinnerEquipo = findViewById(R.id.spinnerEquipoPrestamoN);
 
 
 
         helper = new ControlDB(this);
         btnAgregar = findViewById(R.id.btnAgregar);
         btnRegresar = findViewById(R.id.btnRegresar);
+        llenarSpinnerE(helper);
 
 
 
@@ -54,13 +59,13 @@ public class EnviarTrasladoActivity extends AppCompatActivity {
     }
 
     public void insertarSolicitud(View view){
-        if(nombre.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || fecha.getText().toString().isEmpty() || estadoE.getText().toString().isEmpty() || equipo.getText().toString().isEmpty()){
+        if(nombre.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || fecha.getText().toString().isEmpty() || estadoE.getText().toString().isEmpty() || spinnerEquipo.getSelectedItem()==null){
             Toast.makeText(EnviarTrasladoActivity.this, R.string.todos, Toast.LENGTH_SHORT).show();
         }else{
             String NombreRT = nombre.getText().toString();
             String DescripcionRT = descripcion.getText().toString();
             String fech = fecha.getText().toString();
-            String equipo1 = equipo.getText().toString();
+            String equipo1 = spinnerEquipo.getSelectedItem().toString();
             String estado = estadoE.getText().toString();
             String regInsertados;
 
@@ -76,6 +81,12 @@ public class EnviarTrasladoActivity extends AppCompatActivity {
             Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void llenarSpinnerE(ControlDB helper){
+        equipoArrayAdapter= new ArrayAdapter<Integer>(EnviarTrasladoActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getEquipoID());
+        spinnerEquipo.setAdapter(equipoArrayAdapter);
+    }
+
 
 
 

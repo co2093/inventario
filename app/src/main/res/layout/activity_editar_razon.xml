@@ -9,26 +9,13 @@
         android:id="@+id/txtEstado2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="68dp"
         android:text="ID"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextEstadoEdit"
-        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextIdEdit"
-        android:layout_width="147dp"
-        android:layout_height="39dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="36dp"
-        android:ems="10"
-        android:hint="ID"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/editTextNombreRazonEdit"
@@ -42,6 +29,8 @@
         app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+
 
     <TextView
         android:id="@+id/textSustitucion2"
@@ -159,36 +148,19 @@
         android:id="@+id/txtEquipoInf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="160dp"
         android:text="@string/equipo"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextEquipoEdit"
-        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescripcionrt"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/txtFechaTraslado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/fecha"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextFechaEdit"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEquipoInf"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextDescripcionEdit"
         android:layout_width="343dp"
-        android:layout_height="88dp"
+        android:layout_height="62dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="start|top"
@@ -198,56 +170,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescripcionrt" />
 
-    <EditText
-        android:id="@+id/editTextEquipoEdit"
-        android:layout_width="167dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/equipo"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextFechaEdit"
+    <Spinner
+        android:id="@+id/spinnerEquipoPrestamoN"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <Spinner
+        android:id="@+id/spinnerIDRazon"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextFechaEdit"
         android:layout_width="161dp"
         android:layout_height="42dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="@string/fecha"
-        android:inputType="textPersonName"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEdit" />
-
-    <TextView
-        android:id="@+id/txtEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="@string/estado"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextEstadoEdit"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextEstadoEdit"
         android:layout_width="147dp"
         android:layout_height="39dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="112dp"
         android:ems="10"
         android:hint="@string/estado"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFechaEdit"
+        app:layout_constraintVertical_bias="0.758" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
