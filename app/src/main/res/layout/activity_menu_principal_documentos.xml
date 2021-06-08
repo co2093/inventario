@@ -23,7 +23,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU DOCUMENTO"
+                android:text="@string/menud"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
                 android:id="@+id/btnMenuLibros"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Libros" />
+                android:text="@string/libros" />
         </TableRow>
 
 

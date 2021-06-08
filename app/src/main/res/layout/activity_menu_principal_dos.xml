@@ -21,9 +21,10 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="251dp"
                 android:layout_height="wrap_content"
-                android:text="MENU  INVENTARIO"
+                android:gravity="center"
+                android:text="@string/inventario"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +39,8 @@
             <Button
                 android:id="@+id/btnMenuEquipo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Equipo Informatico" />
+                android:layout_height="match_parent"
+                android:text="@string/equipo" />
         </TableRow>
 
 
@@ -51,8 +52,8 @@
             <Button
                 android:id="@+id/btnMenuDocumentos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Documentos" />
+                android:layout_height="match_parent"
+                android:text="@string/documentos" />
         </TableRow>
 
 

@@ -87,7 +87,7 @@ public class ServiciosWebActualizarDocente extends AppCompatActivity {
             Log.v("guardar",db.insertar(listaDocentes.get(i)));
         }
         db.cerrar();
-        Toast.makeText(this, "Guardado con exito", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.completado, Toast.LENGTH_LONG).show();
         listaDocentes.removeAll(listaDocentes);
         actualizarListView();
     }

@@ -71,7 +71,7 @@ public class ServiciosWebActualizarAutor extends AppCompatActivity {
     public void servicioPHP(View v) {
 
         if (buscador.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Ingrese ID a buscar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.buscarid, Toast.LENGTH_SHORT).show();
         } else{
 
             String id = buscador.getText().toString();
@@ -101,7 +101,7 @@ public class ServiciosWebActualizarAutor extends AppCompatActivity {
             Log.v("guardar",db.insertar(listaAutores.get(i)));
         }
         db.cerrar();
-        Toast.makeText(this, "Guardado con exito", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.completado, Toast.LENGTH_LONG).show();
         listaAutores.removeAll(listaAutores);
         actualizarListView();
     }

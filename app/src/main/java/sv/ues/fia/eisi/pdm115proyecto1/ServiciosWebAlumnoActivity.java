@@ -50,7 +50,7 @@ public class ServiciosWebAlumnoActivity extends AppCompatActivity {
     public void insertarAlumnoWSDos(View v) {
 
         if(editTextIdAlumno.getText().toString().isEmpty() || editTextApellidoAlumno.getText().toString().isEmpty() || editTextNombreIdAlumno.getText().toString().isEmpty()){
-            Toast.makeText(ServiciosWebAlumnoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(ServiciosWebAlumnoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String id = editTextIdAlumno.getText().toString();

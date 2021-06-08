@@ -38,7 +38,7 @@ public class AgregarCategoriaActivity extends AppCompatActivity {
     public void insertarCategoria(View v){
         if(editCategoria.getText() == null){
             Toast.makeText(AgregarCategoriaActivity.this,
-                    "Todos los campos son obligatorios",Toast.LENGTH_LONG).show();
+                    R.string.todos,Toast.LENGTH_LONG).show();
         }else{
         String nom_categoria=editCategoria.getText().toString();
         String regInsertados;

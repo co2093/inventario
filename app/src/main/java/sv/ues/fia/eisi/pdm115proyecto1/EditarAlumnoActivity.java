@@ -58,7 +58,7 @@ public class EditarAlumnoActivity extends AppCompatActivity {
     public void actualizarAlumno(View V){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty() || editApellido.getText().toString().isEmpty()){
-            Toast.makeText(EditarAlumnoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarAlumnoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
             Alumno alumno = new Alumno();
             alumno.setCarnet(editID.getText().toString());

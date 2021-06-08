@@ -43,7 +43,7 @@ public class EditarCategoriaActivity extends AppCompatActivity {
     public void actualizarCategoria(View V) {
 
         if (editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty()) {
-            Toast.makeText(EditarCategoriaActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarCategoriaActivity.this, R.string.todos, Toast.LENGTH_SHORT).show();
         } else {
             Categoria categoria = new Categoria();
             categoria.setId_categoria(Integer.valueOf(editID.getText().toString()));

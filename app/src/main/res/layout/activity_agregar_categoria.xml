@@ -13,7 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="200dp"
-        android:text="Todos los campos son obligatorios."
+        android:text="@string/todos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -25,7 +25,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-medium"
-        android:text="INFO:"
+        android:text="@string/info"
         android:textColor="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/textInfo4"
         app:layout_constraintStart_toStartOf="parent" />
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=">Gestion>Categoría"
+        android:text="@string/agregar"
         app:layout_constraintStart_toEndOf="@+id/textHome2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,7 +89,7 @@
             android:layout_marginStart="97dp"
             android:layout_marginLeft="97dp"
             android:layout_marginTop="-1dp"
-            android:text="Guardar" />
+            android:text="@string/agregar" />
 
         <ImageButton
             android:id="@+id/btnRegresar"
@@ -114,7 +114,7 @@
             android:layout_marginTop="-1dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
-            android:text="Regresar" />
+            android:text="@string/atras" />
 
     </RelativeLayout>
 
@@ -125,7 +125,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="36dp"
-        android:text="Categoría:"
+        android:text="@string/categorias"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />

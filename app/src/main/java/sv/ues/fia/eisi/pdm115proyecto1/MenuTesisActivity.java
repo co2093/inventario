@@ -81,22 +81,22 @@ public class MenuTesisActivity extends AppCompatActivity {
                 Tesis tesis = (Tesis) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuTesisActivity.this);
-                dialogo.setTitle("Eliminar Tesis");
-                dialogo.setMessage("¿Desea Eliminar la Tesis?");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         DBhelper.eliminar(tesis);
                         listadoTesis(DBhelper);
 
-                        Toast.makeText(MenuTesisActivity.this, "Eliminado " + tesis.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuTesisActivity.this, R.string.completado + tesis.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -115,7 +115,7 @@ public class MenuTesisActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuTesisActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuTesisActivity.this, R.string.vacio,  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
 
@@ -123,7 +123,7 @@ public class MenuTesisActivity extends AppCompatActivity {
                         listadoTesis.setAdapter(busquedaAdapter);
 
                         if(busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuTesisActivity.this, "No se ha encontrado tesis con ese Titulo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuTesisActivity.this, R.string.vacio, Toast.LENGTH_LONG).show();
                         }
 
 
@@ -145,7 +145,7 @@ public class MenuTesisActivity extends AppCompatActivity {
     }
 
         public void cancelar(){
-            Toast.makeText(MenuTesisActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+            Toast.makeText(MenuTesisActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
         }
     }
 

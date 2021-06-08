@@ -59,7 +59,7 @@ public class MenuControlFisicoActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuControlFisicoActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuControlFisicoActivity.this, R.string.vacio,  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
 
@@ -67,7 +67,7 @@ public class MenuControlFisicoActivity extends AppCompatActivity {
                         listadoControl1.setAdapter(busquedaAdapter);
 
                         if(busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuControlFisicoActivity.this, "No se ha encontrado registros con ese Carnet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuControlFisicoActivity.this, R.string.noexiste, Toast.LENGTH_LONG).show();
                         }
 
 

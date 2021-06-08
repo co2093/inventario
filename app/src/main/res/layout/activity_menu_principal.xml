@@ -23,8 +23,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU  INVENTARIO"
+                android:text="@string/inventario"
                 android:textSize="28dp"
+                android:gravity="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
                 android:id="@+id/btnMenuEquipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Equipo Informatico" />
+                android:text="@string/equipo" />
         </TableRow>
 
 
@@ -52,7 +53,7 @@
                 android:id="@+id/btnMenuDocumentos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documentos" />
+                android:text="@string/documentos" />
         </TableRow>
 
         <TableRow
@@ -63,7 +64,7 @@
                 android:id="@+id/btnMenuPersonas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Personas" />
+                android:text="@string/personas" />
         </TableRow>
 
         <TableRow
@@ -74,7 +75,7 @@
                 android:id="@+id/btnMenuInventario"
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Inventario" />
+                android:text="@string/inventario" />
         </TableRow>
 
         <TableRow
@@ -85,7 +86,7 @@
                 android:id="@+id/btnMenuEventos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eventos" />
+                android:text="@string/eventos" />
         </TableRow>
 
         <TableRow
@@ -96,7 +97,7 @@
                 android:id="@+id/btnMenuServiciosWeb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SERVICIOS WEB" />
+                android:text="@string/servicios" />
         </TableRow>
 
 

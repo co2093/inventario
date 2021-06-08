@@ -53,7 +53,7 @@ public class AgregarEquipoInformaticoActivity extends AppCompatActivity {
 
 
         if(editTextId.getText().toString().isEmpty() || editTextfecha.getText().toString().isEmpty() ||editTextNombre.getText().toString().isEmpty() || editTextEstado.getText().toString().isEmpty() || editTextMarca.getText().toString().isEmpty() ||editTextModelo.getText().toString().isEmpty() || spinnerCategorias.getSelectedItem()==null){
-            Toast.makeText(AgregarEquipoInformaticoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarEquipoInformaticoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             Integer id = Integer.valueOf(editTextId.getText().toString());

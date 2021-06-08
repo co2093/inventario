@@ -21,9 +21,10 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="247dp"
                 android:layout_height="wrap_content"
-                android:text="MENU  INVENTARIO"
+                android:text="@string/inventario"
+                android:gravity="center"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,7 @@
                 android:id="@+id/btnMenuControlFisico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Control Fisico" />
+                android:text="@string/control" />
         </TableRow>
 
 
@@ -52,7 +53,7 @@
                 android:id="@+id/btnMenuTraslados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Traslados" />
+                android:text="@string/traslados" />
         </TableRow>
 
         <TableRow
@@ -71,7 +72,7 @@
                 android:id="@+id/btnMenuPrestamos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prestamos" />
+                android:text="@string/prestamos" />
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

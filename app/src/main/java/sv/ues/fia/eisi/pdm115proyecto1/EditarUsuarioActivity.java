@@ -58,7 +58,7 @@ public class EditarUsuarioActivity extends AppCompatActivity {
     public void actualizarUsuario(View V){
 
        if(editTextCorreo.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextContrasena.getText().toString().isEmpty()){
-           Toast.makeText(EditarUsuarioActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+           Toast.makeText(EditarUsuarioActivity.this, R.string.todos, Toast.LENGTH_SHORT).show();
        }else {
 
             String rol = spinnerRoles.getSelectedItem().toString();

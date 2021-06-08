@@ -51,7 +51,7 @@ public class ServiciosWebDocentesActivity extends AppCompatActivity {
     public void insertarDocenteWS(View v) {
 
         if(editTextIdDocente.getText().toString().isEmpty() || editTextNombreIdDocente.getText().toString().isEmpty() || editTextApellidoDocente.getText().toString().isEmpty()){
-            Toast.makeText(ServiciosWebDocentesActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(ServiciosWebDocentesActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String id = editTextIdDocente.getText().toString();
@@ -66,7 +66,7 @@ public class ServiciosWebDocentesActivity extends AppCompatActivity {
                     url = urlHostingGratuito+ "?id=" + id + "&nombre="
                             + nombre + "&apellido=" + apellido;
                     Controlador.insertarDocenteExterno(url, this);
-                    Toast.makeText(ServiciosWebDocentesActivity.this, "Registro ingresado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ServiciosWebDocentesActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
                     break;
             }
 

@@ -52,7 +52,7 @@ public class AgregarTesisActivity extends AppCompatActivity {
 
 
         if(editTextTitulo.getText().toString().isEmpty() || editTextFecha.getText().toString().isEmpty() || editTextIdiomaTesis.getText().toString().isEmpty() ||  spinnerAutores.getSelectedItem()==null){
-            Toast.makeText(AgregarTesisActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarTesisActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
 

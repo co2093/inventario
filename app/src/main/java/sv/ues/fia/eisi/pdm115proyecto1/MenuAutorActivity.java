@@ -97,21 +97,21 @@ public class MenuAutorActivity extends AppCompatActivity {
                 Autor autor = (Autor) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuAutorActivity.this);
-                dialogo.setTitle("Eliminar Autor");
-                dialogo.setMessage("Va a eliminar un autor");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DBhelper.eliminar(autor);
                         listaAutores(DBhelper);
 
-                        Toast.makeText(MenuAutorActivity.this, "Eliminado " + autor.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuAutorActivity.this, R.string.completado + autor.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -135,7 +135,7 @@ public class MenuAutorActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuAutorActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuAutorActivity.this, R.string.vacio,  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
 
@@ -144,7 +144,7 @@ public class MenuAutorActivity extends AppCompatActivity {
                         listadoAutor.setAdapter(busquedaAdapter);
 
                         if(busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuAutorActivity.this, "No se ha encontrado registros con ese ID", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuAutorActivity.this, R.string.vacio, Toast.LENGTH_LONG).show();
                         }
 
                         return true;
@@ -166,7 +166,7 @@ public class MenuAutorActivity extends AppCompatActivity {
     }
 
     public void cancelar(){
-        Toast.makeText(MenuAutorActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(MenuAutorActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
     }
 
 

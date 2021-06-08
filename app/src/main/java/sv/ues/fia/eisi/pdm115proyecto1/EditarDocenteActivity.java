@@ -47,7 +47,7 @@ public class EditarDocenteActivity extends AppCompatActivity {
     public void actualizarDocente(View V){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty() || editApellido.getText().toString().isEmpty()){
-            Toast.makeText(EditarDocenteActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarDocenteActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
             Docente docente = new Docente();
             docente.setId(Integer.valueOf(editID.getText().toString()));

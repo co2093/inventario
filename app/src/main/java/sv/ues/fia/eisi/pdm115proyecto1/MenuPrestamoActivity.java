@@ -85,21 +85,21 @@ public class MenuPrestamoActivity extends AppCompatActivity {
                 Prestamo prestamo = (Prestamo) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuPrestamoActivity.this);
-                dialogo.setTitle("Eliminar Prestamo");
-                dialogo.setMessage("Va a eliminar un prestamo");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         DBhelper.eliminar(prestamo);
                         listadoPrestamo(DBhelper);
 
-                        Toast.makeText(MenuPrestamoActivity.this, "Eliminado " + prestamo.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuPrestamoActivity.this, R.string.completado + prestamo.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -118,7 +118,7 @@ public class MenuPrestamoActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuPrestamoActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuPrestamoActivity.this, R.string.vacio,  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
 
@@ -126,7 +126,7 @@ public class MenuPrestamoActivity extends AppCompatActivity {
                         listadoPrestamo.setAdapter(busquedaAdapter);
 
                         if(busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuPrestamoActivity.this, "No se ha encontrado registros con ese ID", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuPrestamoActivity.this, R.string.noexiste, Toast.LENGTH_LONG).show();
                         }
 
 
@@ -153,7 +153,7 @@ public class MenuPrestamoActivity extends AppCompatActivity {
     }
 
     public void cancelar(){
-        Toast.makeText(MenuPrestamoActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(MenuPrestamoActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
     }
 
 }

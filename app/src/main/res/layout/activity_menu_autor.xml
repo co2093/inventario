@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=">Autor"
+        android:text="@string/autor"
         app:layout_constraintStart_toEndOf="@+id/textHome"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +100,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="0dp"
-            android:text="Agregar" />
+            android:text="@string/agregar" />
 
         <TextView
             android:id="@+id/txtEditar"
@@ -112,7 +112,7 @@
             android:layout_marginTop="-3dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
-            android:text="Editar" />
+            android:text="@string/editar" />
 
         <TextView
             android:id="@+id/textBorrar"
@@ -124,7 +124,7 @@
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/txtEditar"
             android:layout_toRightOf="@+id/txtEditar"
-            android:text="Actualizar" />
+            android:text="@string/actualizar" />
 
     </RelativeLayout>
 
@@ -140,7 +140,7 @@
         android:ems="10"
         android:maxLength="7"
         android:inputType="number"
-        android:hint="Buscar por ID..."
+        android:hint="@string/buscarid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -189,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:text="Seleccione un registro para eliminarlo."
+        android:text="@string/seleccione"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInfo1" />
 

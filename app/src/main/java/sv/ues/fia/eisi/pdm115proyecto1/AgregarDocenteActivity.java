@@ -43,7 +43,7 @@ public class AgregarDocenteActivity extends AppCompatActivity {
     public void insertarDocente(View view){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty() || editApellido.getText().toString().isEmpty()){
-            Toast.makeText(AgregarDocenteActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarDocenteActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String nombre = editNombre.getText().toString();

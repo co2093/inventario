@@ -45,7 +45,7 @@ public class EditarAutorActivity extends AppCompatActivity {
     public void actualizarAutor(View V){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty()){
-            Toast.makeText(EditarAutorActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarAutorActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
             Autor autor = new Autor();
             autor.setId(Integer.valueOf(editID.getText().toString()));

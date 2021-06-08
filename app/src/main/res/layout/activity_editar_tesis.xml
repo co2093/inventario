@@ -14,7 +14,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
         android:layout_marginTop="484dp"
-        android:text="ID:"
+        android:text="ID"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -39,7 +39,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginLeft="44dp"
         android:layout_marginTop="376dp"
-        android:text="Idioma:"
+        android:text="@string/idioma"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -64,7 +64,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="288dp"
-        android:text="Autor /es:"
+        android:text="@string/autor"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -76,7 +76,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="188dp"
-        android:text="Fecha:"
+        android:text="@string/fecha"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=">Tesis>Agregar"
+        android:text="@string/editar"
         app:layout_constraintStart_toEndOf="@+id/textHome2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,7 +152,7 @@
             android:layout_marginStart="97dp"
             android:layout_marginLeft="97dp"
             android:layout_marginTop="-1dp"
-            android:text="Guardar" />
+            android:text="@string/guardar" />
 
         <ImageButton
             android:id="@+id/btnRegresarTesisEdit"
@@ -177,7 +177,7 @@
             android:layout_marginTop="-1dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
-            android:text="Regresar" />
+            android:text="@string/atras" />
 
     </RelativeLayout>
 
@@ -188,7 +188,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="Nombre de la Tesis:"
+        android:text="@string/nombre"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />

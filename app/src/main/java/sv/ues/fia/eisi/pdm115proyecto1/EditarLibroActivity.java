@@ -52,7 +52,7 @@ public class EditarLibroActivity extends AppCompatActivity {
 
 
         if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextIdioma.getText().toString().isEmpty() ||editTextEjemplar.getText().toString().isEmpty() || editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
-            Toast.makeText(EditarLibroActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarLibroActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             Integer isbn = Integer.valueOf(editTextIsbn.getText().toString());

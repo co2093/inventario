@@ -94,21 +94,21 @@ public class CategoriaActivity extends AppCompatActivity {
                 Categoria categoria = (Categoria) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(CategoriaActivity.this);
-                dialogo.setTitle("Eliminar Categoria");
-                dialogo.setMessage("Va a eliminar una categoria");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.eliminar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DBHelper.eliminar(categoria);
                         listadoCategoria(DBHelper);
 
-                        Toast.makeText(CategoriaActivity.this, "Operacion completada " + categoria.getNombre_categoria(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoriaActivity.this, R.string.completado + categoria.getNombre_categoria(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -128,7 +128,7 @@ public class CategoriaActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                     if (editbuscar.getText().toString().isEmpty()) {
-                        Toast.makeText(CategoriaActivity.this, "VACIO", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CategoriaActivity.this, R.string.vacio, Toast.LENGTH_LONG).show();
                         return true;
                     } else {
 
@@ -136,7 +136,7 @@ public class CategoriaActivity extends AppCompatActivity {
                         listadoCategorias.setAdapter(busquedaAdapter);
 
                         if (busquedaAdapter.isEmpty()) {
-                            Toast.makeText(CategoriaActivity.this, "No se ha encontrado registros con ese Carnet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CategoriaActivity.this, R.string.noexiste, Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
@@ -147,7 +147,7 @@ public class CategoriaActivity extends AppCompatActivity {
         });
     }
     public void cancelar(){
-        Toast.makeText(CategoriaActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(CategoriaActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
     }
 
     public void listadoCategoria(ControlDB helper){

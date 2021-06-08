@@ -44,7 +44,7 @@ public class AgregarAutorActivity extends AppCompatActivity {
     public void insertarAutor(View view){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty()){
-            Toast.makeText(AgregarAutorActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarAutorActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String nombre = editNombre.getText().toString();

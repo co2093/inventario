@@ -56,7 +56,7 @@ public class AgregarAlumnoActivity extends AppCompatActivity {
     public void insertarAlumno(View view){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty() || editApellido.getText().toString().isEmpty()){
-            Toast.makeText(AgregarAlumnoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarAlumnoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String nombre = editNombre.getText().toString();

@@ -45,7 +45,7 @@ public class EditarActividadActivity extends AppCompatActivity {
     public void actualizarActividad(View V){
 
         if(editID.getText().toString().isEmpty() || editNombre.getText().toString().isEmpty() || editUbicacion.getText().toString().isEmpty()){
-            Toast.makeText(EditarActividadActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarActividadActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
             String nombre = editNombre.getText().toString();
             String ubicacion = editUbicacion.getText().toString();

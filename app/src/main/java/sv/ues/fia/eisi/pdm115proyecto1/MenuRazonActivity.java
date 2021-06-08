@@ -92,21 +92,21 @@ public class MenuRazonActivity extends AppCompatActivity {
                 Razon_Traslado razon = (Razon_Traslado) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuRazonActivity.this);
-                dialogo.setTitle("Eliminar Razon de Traslado");
-                dialogo.setMessage("¿Desea eliminar la Razón de Traslado del Equipo?");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DBhelper.eliminar(razon);
                         listaRazones(DBhelper);
 
-                        Toast.makeText(MenuRazonActivity.this, "Razón de Traslado, Eliminada " + razon.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuRazonActivity.this, R.string.completado + razon.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -130,7 +130,7 @@ public class MenuRazonActivity extends AppCompatActivity {
                 if((event.getAction() == KeyEvent.ACTION_DOWN)&&(keyCode == KeyEvent.KEYCODE_ENTER)){
 
                     if(editBusqueda.getText().toString().isEmpty()){
-                        Toast.makeText(MenuRazonActivity.this, "VACIO",  Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuRazonActivity.this, R.string.vacio,  Toast.LENGTH_LONG).show();
                         return true;
                     }else{
                         Toast.makeText(MenuRazonActivity.this, editBusqueda.getText().toString(),  Toast.LENGTH_LONG).show();
@@ -158,7 +158,7 @@ public class MenuRazonActivity extends AppCompatActivity {
     }
 
     public void cancelar(){
-        Toast.makeText(MenuRazonActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(MenuRazonActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
     }
 
 

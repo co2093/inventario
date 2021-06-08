@@ -86,7 +86,7 @@ public class ServiciosWebActualizarLibro extends AppCompatActivity {
             Log.v("guardar",db.insertar(listaLibros.get(i)));
         }
         db.cerrar();
-        Toast.makeText(this, "Guardado con exito", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.completado, Toast.LENGTH_LONG).show();
         listaLibros.removeAll(listaLibros);
         actualizarListView();
     }

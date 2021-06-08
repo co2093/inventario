@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="ID:"
+        android:text="ID"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextEstadoEdit"
@@ -36,7 +36,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="64dp"
         android:ems="10"
-        android:hint="nombre"
+        android:hint="@string/nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.275"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=" Traslado > Editar Razon de Traslado"
+        android:text="@string/editar"
         app:layout_constraintStart_toEndOf="@+id/textHome2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +115,7 @@
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
-            android:text="Regresar" />
+            android:text="@string/atras" />
 
         <TextView
             android:id="@+id/textAgregar"
@@ -127,7 +127,7 @@
             android:layout_marginStart="98dp"
             android:layout_marginLeft="98dp"
             android:layout_marginTop="0dp"
-            android:text="Editar" />
+            android:text="@string/editar" />
 
     </RelativeLayout>
 
@@ -138,7 +138,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
-        android:text="Nombre de la Razón de Traslado:"
+        android:text="@string/nombre"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
-        android:text="Describa el motivo de Razón de Traslado:"
+        android:text="@string/motivo"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
-        android:text="Equipo a Trasladar:"
+        android:text="@string/equipo"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextEquipoEdit"
@@ -176,7 +176,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="56dp"
-        android:text="Fecha de Traslado:"
+        android:text="@string/fecha"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextFechaEdit"
@@ -192,7 +192,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="descripcion"
+        android:hint="@string/motivo"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +203,7 @@
         android:layout_width="167dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:hint="equipo"
+        android:hint="@string/equipo"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextFechaEdit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +220,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:ems="10"
-        android:hint="fecha"
+        android:hint="@string/fecha"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEdit" />
@@ -230,7 +230,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="Estado:"
+        android:text="@string/estado"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextEstadoEdit"
@@ -245,7 +245,7 @@
         android:layout_marginRight="64dp"
         android:layout_marginBottom="96dp"
         android:ems="10"
-        android:hint="estado"
+        android:hint="@string/estado"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

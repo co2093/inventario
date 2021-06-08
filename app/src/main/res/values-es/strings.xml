@@ -1,54 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">pdm115proyecto1</string>
-    <string name="title_activity_main2" translatable="false">MainActivity</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_title" translatable="false">Android Studio</string>
-    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
-    <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="action_settings" translatable="false">Settings</string>
-
-    <string name="menu_home" translatable="false">Home</string>
-    <string name="menu_gallery" translatable="false">Gallery</string>
-    <string name="menu_slideshow" translatable="false">Slideshow</string>
-    <string name="title_activity_menu_actividad" translatable="false">MenuActividadActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label" translatable="false">First Fragment</string>
-    <string name="second_fragment_label" translatable="false">Second Fragment</string>
-    <string name="next" translatable="false">Next</string>
-    <string name="previous" translatable="false">Previous</string>
-
-    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
-    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_editar_actividad" translatable="false">EditarActividadActivity</string>
-
-
-
-    <string name="equipo">Equipo</string>
+    <string name="equipo">Equipo Informatico</string>
     <string name="usuario">Usuario</string>
     <string name="contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
-
-    <string name="menu">Menu</string>
+    <string name="menu">Menu Inventario</string>
     <string name="documentos">Documentos</string>
     <string name="personas">Personas</string>
     <string name="inventario">Inventario</string>
     <string name="eventos">Eventos</string>
     <string name="servicios">Servicios Web</string>
-
-    <string name="equipoMenu">Menu Equipo</string>
+    <string name="equipoMenu">Equipo Menu</string>
     <string name="categorias">Categorias</string>
-
     <string name="agregar">Agregar</string>
     <string name="editar">Editar</string>
     <string name="actualizar">Actualizar</string>
-    <string name="buscarNombre">Buscar</string>
+    <string name="buscarNombre">Buscar por nombre</string>
     <string name="info">Informacion</string>
-    <string name="seleccione">Seleccione un registro para eliminarlo</string>
+    <string name="seleccione">Seleccione un registro para eliminar</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="eliminar">Eliminar</string>
-
     <string name="id">ID</string>
     <string name="nombre">Nombre</string>
     <string name="atras">Atras</string>
@@ -56,53 +29,39 @@
     <string name="estado">Estado</string>
     <string name="modelo">Modelo</string>
     <string name="fecha">Fecha</string>
-
     <string name="autor">Autor</string>
     <string name="idioma">Idioma</string>
     <string name="guardar">Guardar</string>
-    <string name="buscarid">Buscar</string>
+    <string name="buscarid">Buscar por id</string>
     <string name="libros">Libros</string>
-
     <string name="ejemplar">Ejemplar</string>
     <string name="editorial">Editorial</string>
-
     <string name="apellido">Apellido</string>
-    <string name="todos">Todos los campos</string>
-
+    <string name="todos">Debe completar todos los campos</string>
     <string name="email">Correo</string>
     <string name="password">Contrasena</string>
-
-    <string name="menud">Documentos Menu</string>
+    <string name="menud">Menu documentos</string>
     <string name="menup">Menu personas</string>
     <string name="menue">Menu eventos</string>
-    <string name="menus">Menu Servicios</string>
-
+    <string name="menus">Menu SW</string>
     <string name="actividades">Actividades</string>
-    <string name="ubicaion">Ubicacion</string>
-
+    <string name="ubicaion">Ubicación</string>
     <string name="autorsw">Actualizar autor</string>
-    <string name="librosw">Actualizaar libro</string>
-    <string name="docentessw">Actualizar docentes</string>
-
+    <string name="librosw">Actualizar libro</string>
+    <string name="docentessw">Actualizar docente</string>
     <string name="prestamos">Prestamos</string>
     <string name="prestamo">Prestamo</string>
     <string name="devolcion">Devolucion</string>
     <string name="responsable">Responsable</string>
-
     <string name="motivo">Motivo</string>
     <string name="docente">Docente</string>
     <string name="alumno">Alumno</string>
     <string name="control">Control</string>
-
-    <string name="buscarC">BuscarC</string>
-    <string name="buscarcar">Buscar car</string>
+    <string name="buscarC">Buscar por categoría</string>
+    <string name="buscarcar">Buscar por carnet</string>
     <string name="traslados">Traslados</string>
     <string name="consultar">Consultar</string>
-
     <string name="vacio">Vacio</string>
     <string name="completado">Completado</string>
     <string name="noexiste">No existe</string>
-
-
-
 </resources>

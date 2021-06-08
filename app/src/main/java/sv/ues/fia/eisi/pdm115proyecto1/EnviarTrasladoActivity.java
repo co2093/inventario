@@ -55,7 +55,7 @@ public class EnviarTrasladoActivity extends AppCompatActivity {
 
     public void insertarSolicitud(View view){
         if(nombre.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || fecha.getText().toString().isEmpty() || estadoE.getText().toString().isEmpty() || equipo.getText().toString().isEmpty()){
-            Toast.makeText(EnviarTrasladoActivity.this, "TODOS LOS CAMPOS SON OBLIGATORIOS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EnviarTrasladoActivity.this, R.string.todos, Toast.LENGTH_SHORT).show();
         }else{
             String NombreRT = nombre.getText().toString();
             String DescripcionRT = descripcion.getText().toString();

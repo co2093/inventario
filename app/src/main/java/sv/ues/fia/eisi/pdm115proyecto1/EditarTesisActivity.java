@@ -60,7 +60,7 @@ public class EditarTesisActivity extends AppCompatActivity {
 
 
         if(editTextTituloEdit.getText().toString().isEmpty() || editTextID.getText().toString().isEmpty() ||editTextFechaEdit.getText().toString().isEmpty() || editTextIdiomaTesisEdit.getText().toString().isEmpty() ||  spinnerAutoresEdit.getSelectedItem()==null){
-            Toast.makeText(EditarTesisActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(EditarTesisActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String titulo = editTextTituloEdit.getText().toString();

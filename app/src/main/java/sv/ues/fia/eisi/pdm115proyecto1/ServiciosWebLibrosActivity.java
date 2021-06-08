@@ -59,7 +59,7 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
     public void insertarLibroSW(View v) {
 
         if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextEjemplar.getText().toString().isEmpty() || editTextIdiomaLibro.getText().toString().isEmpty() ||editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
-            Toast.makeText(ServiciosWebLibrosActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(ServiciosWebLibrosActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             Integer isbn = Integer.valueOf(editTextIsbn.getText().toString());

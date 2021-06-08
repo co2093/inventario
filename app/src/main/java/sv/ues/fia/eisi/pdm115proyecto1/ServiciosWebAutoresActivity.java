@@ -53,7 +53,7 @@ public class ServiciosWebAutoresActivity extends AppCompatActivity {
     public void insertarAutoresWS(View v) {
 
         if(editTextIdAutor.getText().toString().isEmpty() || editTextNombreAutor.getText().toString().isEmpty()){
-            Toast.makeText(ServiciosWebAutoresActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(ServiciosWebAutoresActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String id = editTextIdAutor.getText().toString();
@@ -68,7 +68,7 @@ public class ServiciosWebAutoresActivity extends AppCompatActivity {
                     url = urlHostingGratuito+ "?id=" + id + "&nombre="
                             + nombre;
                     Controlador.insertarAutorExterno(url, this);
-                    Toast.makeText(ServiciosWebAutoresActivity.this, "Registro ingresado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ServiciosWebAutoresActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
                     break;
             }
 

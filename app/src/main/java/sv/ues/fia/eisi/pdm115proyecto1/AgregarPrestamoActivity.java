@@ -58,7 +58,7 @@ public class AgregarPrestamoActivity extends AppCompatActivity {
 
 
         if(editTextId.getText().toString().isEmpty() || editTextPrestamo.getText().toString().isEmpty() || editTextDevolucion.getText().toString().isEmpty() || spinnerDocentes.getSelectedItem()==null || spinnerEquipo.getSelectedItem()==null || spinnerActividad.getSelectedItem()==null){
-            Toast.makeText(AgregarPrestamoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(AgregarPrestamoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             Integer id = Integer.valueOf(editTextId.getText().toString());

@@ -68,7 +68,7 @@ public class ServiciosWebEquipoActivity extends AppCompatActivity {
     public void insertarEquipoSW(View v) {
 
         if(editTextId.getText().toString().isEmpty() || editTextfecha.getText().toString().isEmpty() ||editTextNombre.getText().toString().isEmpty() || editTextEstado.getText().toString().isEmpty() || editTextMarca.getText().toString().isEmpty() ||editTextModelo.getText().toString().isEmpty() || spinnerCategorias.getSelectedItem()==null){
-            Toast.makeText(ServiciosWebEquipoActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(ServiciosWebEquipoActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             Integer id = Integer.valueOf(editTextId.getText().toString());

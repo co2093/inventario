@@ -23,7 +23,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU  PERSONAS"
+                android:text="@string/menup"
+                android:gravity="center"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,7 @@
                 android:id="@+id/btnMenuAutores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Autores" />
+                android:text="@string/autor" />
         </TableRow>
 
 
@@ -52,7 +53,7 @@
                 android:id="@+id/btnMenuDocentes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Docentes" />
+                android:text="@string/docente" />
         </TableRow>
 
         <TableRow
@@ -63,7 +64,7 @@
                 android:id="@+id/btnMenuAlumnos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Alumnos" />
+                android:text="@string/alumno" />
         </TableRow>
 
         <TableRow
@@ -74,7 +75,7 @@
                 android:id="@+id/btnMenuUsuarios"
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
-                android:text="Usuarios" />
+                android:text="@string/usuario" />
         </TableRow>
 
 

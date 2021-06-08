@@ -12,7 +12,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="360dp"
-        android:text="Estado:"
+        android:text="@string/estado"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -40,9 +40,9 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="528dp"
-        android:text="Fecha:"
+        android:text="@string/fecha"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDateEquipoEdit"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -54,7 +54,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="440dp"
-        android:text="Modelo:"
+        android:text="@string/modelo"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -80,7 +80,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="272dp"
-        android:text="Marca:"
+        android:text="@string/marca"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -106,7 +106,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="192dp"
-        android:text="Categoria:"
+        android:text="@string/categorias"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -118,7 +118,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="104dp"
-        android:text="Nombre:"
+        android:text="@string/nombre"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -142,7 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=">Equipo>Editar"
+        android:text="@string/editar"
         app:layout_constraintStart_toEndOf="@+id/textHome2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -196,7 +196,7 @@
             android:layout_marginStart="97dp"
             android:layout_marginLeft="97dp"
             android:layout_marginTop="-1dp"
-            android:text="Guardar" />
+            android:text="@string/guardar" />
 
         <ImageButton
             android:id="@+id/btnRegresarEquipoEdit"
@@ -221,7 +221,7 @@
             android:layout_marginTop="-1dp"
             android:layout_toEndOf="@+id/textAgregar"
             android:layout_toRightOf="@+id/textAgregar"
-            android:text="Regresar" />
+            android:text="@string/atras" />
 
     </RelativeLayout>
 
@@ -232,7 +232,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="32dp"
-        android:text="ID:"
+        android:text="ID"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />

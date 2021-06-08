@@ -86,7 +86,7 @@ public class MenuEquipoInformaticoActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                     if (editbuscar.getText().toString().isEmpty()) {
-                        Toast.makeText(MenuEquipoInformaticoActivity.this, "VACIO", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuEquipoInformaticoActivity.this, R.string.vacio, Toast.LENGTH_LONG).show();
                         return true;
                     } else {
 
@@ -94,7 +94,7 @@ public class MenuEquipoInformaticoActivity extends AppCompatActivity {
                         listadoEquipo.setAdapter(busquedaAdapter);
 
                         if (busquedaAdapter.isEmpty()) {
-                            Toast.makeText(MenuEquipoInformaticoActivity.this, "No se ha encontrado registros con ese nombre", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuEquipoInformaticoActivity.this, R.string.noexiste, Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
@@ -111,22 +111,22 @@ public class MenuEquipoInformaticoActivity extends AppCompatActivity {
                 EquipoInformatico equipoInformatico = (EquipoInformatico) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder dialogo = new AlertDialog.Builder(MenuEquipoInformaticoActivity.this);
-                dialogo.setTitle("Eliminar Equipo");
-                dialogo.setMessage("Va a eliminar un equipo");
+                dialogo.setTitle(R.string.eliminar);
+                dialogo.setMessage(R.string.eliminar);
                 dialogo.setCancelable(false);
-                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                dialogo.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         DBhelper.eliminar(equipoInformatico);
                         listadoEquipo(DBhelper);
 
-                        Toast.makeText(MenuEquipoInformaticoActivity.this, "Eliminado " + equipoInformatico.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuEquipoInformaticoActivity.this, R.string.completado + equipoInformatico.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                dialogo.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -153,6 +153,6 @@ public class MenuEquipoInformaticoActivity extends AppCompatActivity {
     }
 
     public void cancelar(){
-        Toast.makeText(MenuEquipoInformaticoActivity.this, "Operacion cancelada", Toast.LENGTH_LONG).show();
+        Toast.makeText(MenuEquipoInformaticoActivity.this, R.string.completado, Toast.LENGTH_LONG).show();
     }
 }
