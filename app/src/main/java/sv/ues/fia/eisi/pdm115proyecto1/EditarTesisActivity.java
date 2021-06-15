@@ -16,8 +16,8 @@ public class EditarTesisActivity extends AppCompatActivity {
     ImageButton btnAgregar, btnRegresar;
     ControlDB helper;
     EditText editTextTituloEdit, editTextFechaEdit,editTextIdiomaTesisEdit, editTextID;
-    Spinner spinnerAutoresEdit;
-    ArrayAdapter tesisArrayAdapter;
+    Spinner spinnerAutoresEdit, spinnerIdiomas;
+    ArrayAdapter tesisArrayAdapter, idiomArrayAdapter;
 
 
     @Override
@@ -35,10 +35,13 @@ public class EditarTesisActivity extends AppCompatActivity {
         editTextTituloEdit = findViewById(R.id.editTextTituloEdit);
         editTextFechaEdit = findViewById(R.id.editTextFechaPubEdit);
         spinnerAutoresEdit = findViewById(R.id.spinnerAutoresTesisEdit);
-        editTextIdiomaTesisEdit = findViewById(R.id.editTextIdiomaTesisEdit);
+      //  editTextIdiomaTesisEdit = findViewById(R.id.editTextIdiomaTesisEdit);
         editTextID = findViewById(R.id.editTextIDTesisEdit);
+        spinnerIdiomas = findViewById(R.id.spinnerIdiomaTesisEdit);
+
 
         llenarSpinner(helper);
+        llenarSpinner2(helper);
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,14 +62,14 @@ public class EditarTesisActivity extends AppCompatActivity {
     public void actualizarTesis(View v){
 
 
-        if(editTextTituloEdit.getText().toString().isEmpty() || editTextID.getText().toString().isEmpty() ||editTextFechaEdit.getText().toString().isEmpty() || editTextIdiomaTesisEdit.getText().toString().isEmpty() ||  spinnerAutoresEdit.getSelectedItem()==null){
+        if(editTextTituloEdit.getText().toString().isEmpty() || editTextID.getText().toString().isEmpty() ||editTextFechaEdit.getText().toString().isEmpty() || spinnerIdiomas.getSelectedItem() ==null ||  spinnerAutoresEdit.getSelectedItem()==null){
             Toast.makeText(EditarTesisActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
             String titulo = editTextTituloEdit.getText().toString();
             String autor = spinnerAutoresEdit.getSelectedItem().toString();
             String fechapub = editTextFechaEdit.getText().toString();
-            String idioma = editTextIdiomaTesisEdit.getText().toString();
+            String idioma = spinnerIdiomas.getSelectedItem().toString();
             int id = Integer.valueOf(editTextID.getText().toString());
             String regInsertados;
 
@@ -91,6 +94,11 @@ public class EditarTesisActivity extends AppCompatActivity {
     public void llenarSpinner(ControlDB helper){
         tesisArrayAdapter= new ArrayAdapter<String>(EditarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getAlumnosCarnet());
         spinnerAutoresEdit.setAdapter(tesisArrayAdapter);
+    }
+
+    public void llenarSpinner2(ControlDB helper){
+        idiomArrayAdapter= new ArrayAdapter<String>(EditarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getIdiomas());
+        spinnerIdiomas.setAdapter(idiomArrayAdapter);
     }
 
 

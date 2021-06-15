@@ -35,7 +35,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "proyecto1_vfinal.s3db";
+        private static final String BASE_DATOS = "proyecto1_vfinal2.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -55,7 +55,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE actividad (id INTEGER PRIMARY KEY, nombre VARCHAR (128), ubicacion VARCHAR (128));");
                 db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), categoria VARCHAR (128), equipo INTEGER);");
                 db.execSQL("CREATE TABLE control_fisico (id INTEGER PRIMARY KEY AUTOINCREMENT, categoria VARCHAR (128), existencias INTEGER, prestamos INTEGER);");
-
+                db.execSQL("CREATE TABLE idioma (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128));");
 
 
                 //Damaris
@@ -67,7 +67,7 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
 
                 //Triggers
-                db.execSQL("CREATE TRIGGER actualizar_estado\n" +
+                db.execSQL("CREATE TRIGGER actualizar_estado_equipo\n" +
                         "AFTER INSERT\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -75,7 +75,7 @@ public class ControlDB {
                         "        UPDATE equipo SET estado = \"Prestado\" WHERE equipo.id == new.equipo;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_estado2\n" +
+                db.execSQL("CREATE TRIGGER actualizar_estado_equipo_dos\n" +
                         "AFTER DELETE\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -83,7 +83,7 @@ public class ControlDB {
                         "        UPDATE equipo SET estado = \"Disponible\" WHERE equipo.id == old.equipo;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER control_fisico_uno\n" +
+                db.execSQL("CREATE TRIGGER control_fisico_categoria\n" +
                         "AFTER INSERT\n" +
                         "ON categoria \n" +
                         "FOR EACH ROW\n" +
@@ -93,7 +93,7 @@ public class ControlDB {
                         "\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control\n" +
+                db.execSQL("CREATE TRIGGER actualizar_control_existencias\n" +
                         "AFTER INSERT\n" +
                         "ON equipo \n" +
                         "FOR EACH ROW\n" +
@@ -101,7 +101,7 @@ public class ControlDB {
                         "        UPDATE control_fisico SET existencias = existencias+1 WHERE new.categoria == control_fisico.categoria;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control_dos\n" +
+                db.execSQL("CREATE TRIGGER actualizar_control_existencias_dos\n" +
                         "AFTER DELETE\n" +
                         "ON equipo \n" +
                         "FOR EACH ROW\n" +
@@ -109,7 +109,7 @@ public class ControlDB {
                         "     UPDATE control_fisico SET existencias = existencias-1 WHERE old.categoria == control_fisico.categoria;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control_tres\n" +
+                db.execSQL("CREATE TRIGGER actualizar_control_prestamo\n" +
                         "AFTER INSERT\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -117,7 +117,7 @@ public class ControlDB {
                         "        UPDATE control_fisico SET prestamos = prestamos+1 WHERE control_fisico.categoria == new.categoria;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control_cuatro\n" +
+                db.execSQL("CREATE TRIGGER actualizar_control_prestamo_dos\n" +
                         "AFTER INSERT\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -125,7 +125,7 @@ public class ControlDB {
                         "        UPDATE control_fisico SET existencias = existencias -1 WHERE control_fisico.categoria == new.categoria;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control_cinco\n" +
+                db.execSQL("CREATE TRIGGER actualizar_existencia_por_prestamo\n" +
                         "AFTER DELETE\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -133,7 +133,7 @@ public class ControlDB {
                         "      UPDATE control_fisico SET existencias = existencias+1 WHERE control_fisico.categoria == old.categoria;\n" +
                         "END");
 
-                db.execSQL("CREATE TRIGGER actualizar_control_seis\n" +
+                db.execSQL("CREATE TRIGGER actualizar_prestamo_control\n" +
                         "AFTER DELETE\n" +
                         "ON prestamo \n" +
                         "FOR EACH ROW\n" +
@@ -383,6 +383,16 @@ public class ControlDB {
             db.insert("usuario", null, contentValues);
             return "OK";
         }
+    }
+
+    public String insertar(Idioma idioma){
+
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre", idioma.getNombre());
+
+            db.insert("idioma", null, contentValues);
+            return "";
     }
 
     public String insertar (Autor autor){
@@ -1002,6 +1012,31 @@ public class ControlDB {
                 String id = cursor.getString(1);
 
                 lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<String> getIdiomas(){
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM idioma";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String nombre = cursor.getString(1);
+
+                lista.add(nombre);
 
             }while (cursor.moveToNext());
         }else {
@@ -1957,6 +1992,34 @@ public class ControlDB {
         rol2.setIdRol(2222);
         rol2.setNombreRol("Secretaria");
         insertar(rol2);
+
+        db.execSQL("DELETE FROM idioma");
+        Idioma idioma = new Idioma();
+        idioma.setNombre("Inglés");
+        insertar(idioma);
+
+        Idioma idioma2 = new Idioma();
+        idioma2.setNombre("Español");
+        insertar(idioma2);
+
+        Idioma idioma3 = new Idioma();
+        idioma3.setNombre("Francés");
+        insertar(idioma3);
+
+        Idioma idioma4 = new Idioma();
+        idioma4.setNombre("Alemán");
+        insertar(idioma4);
+
+        Idioma idioma5 = new Idioma();
+        idioma5.setNombre("Portugués");
+        insertar(idioma5);
+
+
+        Idioma idioma7 = new Idioma();
+        idioma7.setNombre("Otro");
+        insertar(idioma7);
+
+
 
         cerrar();
         return "Usuarios de prueba creados";

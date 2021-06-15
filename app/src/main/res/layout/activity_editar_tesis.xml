@@ -44,16 +44,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-    <EditText
-        android:id="@+id/editTextIdiomaTesisEdit"
-        android:layout_width="192dp"
-        android:layout_height="40dp"
+
+    <Spinner
+        android:id="@+id/spinnerIdiomaTesisEdit"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
         android:layout_marginTop="376dp"
-        android:digits="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 1234567890"
-        android:ems="10"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintHorizontal_bias="0.675"
         app:layout_constraintStart_toEndOf="@+id/textagregarCategoria5"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 

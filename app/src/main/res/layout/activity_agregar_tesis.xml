@@ -19,18 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-    <EditText
-        android:id="@+id/editTextIdiomaTesis"
-        android:layout_width="192dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="444dp"
-        android:digits="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 1234567890"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
-        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria5"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
 
     <TextView
         android:id="@+id/textagregarCategoria3"
@@ -177,6 +166,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.656"
         app:layout_constraintStart_toEndOf="@+id/textagregarCategoria3"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <Spinner
+        android:id="@+id/spinnerIdiomaTesis"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="452dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria5"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <EditText

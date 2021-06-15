@@ -17,8 +17,8 @@ public class AgregarTesisActivity extends AppCompatActivity {
     ImageButton btnAgregar, btnRegresar;
     ControlDB helper;
     EditText editTextTitulo, editTextFecha,editTextIdiomaTesis;
-    Spinner spinnerAutores;
-    ArrayAdapter tesisArrayAdapter;
+    Spinner spinnerAutores, spinnerIdiomas;
+    ArrayAdapter tesisArrayAdapter, idiomArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,12 @@ public class AgregarTesisActivity extends AppCompatActivity {
         editTextTitulo = findViewById(R.id.editTextTitulo);
         editTextFecha = findViewById(R.id.editTextFechaPub);
         spinnerAutores = findViewById(R.id.spinnerAutoresTesis);
-        editTextIdiomaTesis = findViewById(R.id.editTextIdiomaTesis);
-
+       // editTextIdiomaTesis = findViewById(R.id.editTextIdiomaTesis);
+        spinnerIdiomas = findViewById(R.id.spinnerIdiomaTesis);
 
 
         llenarSpinner(helper);
+        llenarSpinner2(helper);
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,7 @@ public class AgregarTesisActivity extends AppCompatActivity {
     public void insertarTesis(View view){
 
 
-        if(editTextTitulo.getText().toString().isEmpty() || editTextFecha.getText().toString().isEmpty() || editTextIdiomaTesis.getText().toString().isEmpty() ||  spinnerAutores.getSelectedItem()==null){
+        if(editTextTitulo.getText().toString().isEmpty() || editTextFecha.getText().toString().isEmpty() || spinnerIdiomas.getSelectedItem() == null ||  spinnerAutores.getSelectedItem()==null){
             Toast.makeText(AgregarTesisActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
@@ -59,7 +60,7 @@ public class AgregarTesisActivity extends AppCompatActivity {
             String titulo = editTextTitulo.getText().toString();
             String autor = spinnerAutores.getSelectedItem().toString();
             String fechapub = editTextFecha.getText().toString();
-            String idioma = editTextIdiomaTesis.getText().toString();
+            String idioma = spinnerIdiomas.getSelectedItem().toString();
             String regInsertados;
 
             Tesis tesis = new Tesis();
@@ -81,6 +82,11 @@ public class AgregarTesisActivity extends AppCompatActivity {
     public void llenarSpinner(ControlDB helper){
         tesisArrayAdapter= new ArrayAdapter<String>(AgregarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getAlumnosCarnet());
         spinnerAutores.setAdapter(tesisArrayAdapter);
+    }
+
+    public void llenarSpinner2(ControlDB helper){
+        idiomArrayAdapter= new ArrayAdapter<String>(AgregarTesisActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getIdiomas());
+        spinnerIdiomas.setAdapter(idiomArrayAdapter);
     }
 
 
