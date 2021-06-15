@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Paint;
 import android.media.audiofx.DynamicsProcessing;
 import android.provider.ContactsContract;
 import android.widget.ListView;
@@ -35,7 +36,7 @@ public class ControlDB {
 
     private static class DatabaseHelper extends SQLiteOpenHelper{
 
-        private static final String BASE_DATOS = "proyecto1_vfinal2.s3db";
+        private static final String BASE_DATOS = "proyecto1_vfinal43.s3db";
         private static final int version = 1;
         public DatabaseHelper (Context context){
             super(context, BASE_DATOS, null, version);
@@ -45,7 +46,7 @@ public class ControlDB {
         public void onCreate(SQLiteDatabase db){
             try{
 
-
+                //Tablas
                 db.execSQL("CREATE TABLE autor(id INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR (128));");
                 db.execSQL("CREATE TABLE docente(id INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
                 db.execSQL("CREATE TABLE alumno (carnet VARCHAR(128) NOT NULL PRIMARY KEY, nombre VARCHAR (128), apellido VARCHAR(128));");
@@ -56,14 +57,11 @@ public class ControlDB {
                 db.execSQL("CREATE TABLE prestamo (id INTEGER PRIMARY KEY, fecha_prestamo VARCHAR (128), fecha_devolucion VARCHAR(128), actividad INTEGER, responsable VARCHAR (128), categoria VARCHAR (128), equipo INTEGER);");
                 db.execSQL("CREATE TABLE control_fisico (id INTEGER PRIMARY KEY AUTOINCREMENT, categoria VARCHAR (128), existencias INTEGER, prestamos INTEGER);");
                 db.execSQL("CREATE TABLE idioma (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128));");
-
-
-                //Damaris
+                db.execSQL("CREATE TABLE pais (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR (128));");
+                db.execSQL("CREATE TABLE editorial (id INTEGER PRIMARY KEY,nombre VARCHAR (128), pais VARCHAR(128));");
                 db.execSQL("CREATE TABLE razon (id INTEGER PRIMARY KEY AUTOINCREMENT,nombre_razon VARCHAR(128) , descripcion VARCHAR(128), equipo VARCHAR(10), fecha VARCHAR(128) , estado VARCHAR(30));");
                 db.execSQL("CREATE TABLE libro (isbn INTEGER NOT NULL PRIMARY KEY,nombre_libro VARCHAR (256),autor INTEGER (13),ejemplar INTEGER,editorial VARCHAR(128), idioma VARCHAR(128));");
                 db.execSQL("CREATE TABLE tesis (id_tesis INTEGER NOT NULL PRIMARY KEY,nombre_tesis VARCHAR (256), fecha_publicacion VARCHAR(128),idioma VARCHAR(128),id_autor_tesis VARCHAR);");
-
-                //Francisco
                 db.execSQL("CREATE TABLE categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_categoria VARCHAR (256) NOT NULL)");
 
                 //Triggers
@@ -385,6 +383,22 @@ public class ControlDB {
         }
     }
 
+    public String insertar(Editorial editorial){
+
+        if (verificarIntegridad(editorial, 12)){
+            return "Ya existe una editorial con este id";
+        }else {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("id", editorial.getId());
+            contentValues.put("nombre", editorial.getNombre());
+            contentValues.put("pais", editorial.getPais());
+
+            db.insert("editorial", null, contentValues);
+            return "OK";
+        }
+    }
+
     public String insertar(Idioma idioma){
 
 
@@ -393,6 +407,16 @@ public class ControlDB {
 
             db.insert("idioma", null, contentValues);
             return "";
+    }
+
+    public String insertar(Pais pais){
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nombre", pais.getNombre());
+
+        db.insert("pais", null, contentValues);
+        return "";
     }
 
     public String insertar (Autor autor){
@@ -585,6 +609,27 @@ public class ControlDB {
                 String nombre_categoria = cursor.getString(1);
                 Categoria categoria = new Categoria(id_categoria,nombre_categoria);
                 lista.add(categoria);
+            }while (cursor.moveToNext());
+        }else{
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<Editorial> getEditorial(){
+        List<Editorial> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM editorial";
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String pais = cursor.getString(2);
+                Editorial editorial = new Editorial(id, nombre, pais);
+                lista.add(editorial);
             }while (cursor.moveToNext());
         }else{
 
@@ -1023,10 +1068,60 @@ public class ControlDB {
         return lista;
     }
 
+    public List<String> getEditorialNombres(){
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM editorial";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String id = cursor.getString(1);
+
+                lista.add(id);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
     public List<String> getIdiomas(){
         List<String> lista = new ArrayList<>();
 
         String queryString = "SELECT * FROM idioma";
+
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                String nombre = cursor.getString(1);
+
+                lista.add(nombre);
+
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public List<String> getPaises(){
+        List<String> lista = new ArrayList<>();
+
+        String queryString = "SELECT * FROM pais";
 
         SQLiteDatabase db = DBHelper.getReadableDatabase();
 
@@ -1229,6 +1324,31 @@ public class ControlDB {
 
                 Actividad actividad = new Actividad(id2,nombre,ubicacion);
                 lista.add(actividad);
+            }while (cursor.moveToNext());
+        }else {
+
+        }
+        cursor.close();
+        db.close();
+        return lista;
+
+    }
+
+    public List<Editorial> consultaEditorial(int id){
+
+        List<Editorial> lista = new ArrayList<>();
+        String queryString = "SELECT * FROM editorial WHERE id = " + id;
+        SQLiteDatabase db = DBHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int id2 = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String pais = cursor.getString(2);
+
+                Editorial editorial = new Editorial(id2,nombre,pais);
+                lista.add(editorial);
             }while (cursor.moveToNext());
         }else {
 
@@ -1485,6 +1605,18 @@ public class ControlDB {
         }
     }
 
+    public boolean eliminar(Editorial editorial){
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String queryString = "DELETE FROM libro WHERE id =" + editorial.getId();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public boolean eliminar(Actividad actividad){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String queryString = "DELETE FROM actividad WHERE id =" + actividad.getIdActividad();
@@ -1604,6 +1736,24 @@ public class ControlDB {
             contentValues.put("ubicacion", actividad.getUbicacion());
 
             db.update("actividad", contentValues, "id = ?", id);
+
+            return "Actualizado";
+        }
+        else {
+            return "Registro no existe";
+        }
+
+    }
+
+    public String actualizar(Editorial editorial){
+
+        if (verificarIntegridad(editorial, 12)){
+            String[] id = {String.valueOf(editorial.getId())};
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre", editorial.getNombre());
+            contentValues.put("pais", editorial.getPais());
+
+            db.update("editorial", contentValues, "id = ?", id);
 
             return "Actualizado";
         }
@@ -1947,6 +2097,22 @@ public class ControlDB {
 
             }
 
+            case 12:{
+
+                Editorial editorial = (Editorial) dato;
+                String [] id =  {String.valueOf(editorial.getId())};
+                abrir();
+                Cursor cursor = db.query("editorial", null, "id = ?", id, null, null, null);
+
+                if(cursor.moveToFirst()){
+                    return true;
+                }else {
+                    return false;
+                }
+
+
+            }
+
 
             default:
                 return false;
@@ -2018,6 +2184,48 @@ public class ControlDB {
         Idioma idioma7 = new Idioma();
         idioma7.setNombre("Otro");
         insertar(idioma7);
+
+        db.execSQL("DELETE FROM pais");
+        Pais pais = new Pais();
+        pais.setNombre("El Salvador");
+        insertar(pais);
+
+        Pais pais2 = new Pais();
+        pais2.setNombre("México");
+        insertar(pais2);
+
+        Pais pais3 = new Pais();
+        pais3.setNombre("España");
+        insertar(pais3);
+
+        Pais pais4 = new Pais();
+        pais4.setNombre("Costa Rica");
+        insertar(pais4);
+
+        Pais pais5 = new Pais();
+        pais5.setNombre("Brasil");
+        insertar(pais5);
+
+        Pais pais6 = new Pais();
+        pais6.setNombre("Francia");
+        insertar(pais6);
+
+        Pais pais7 = new Pais();
+        pais7.setNombre("Estados Unidos");
+        insertar(pais7);
+
+        Pais pais8 = new Pais();
+        pais8.setNombre("Canadá");
+        insertar(pais8);
+
+        Pais pais9 = new Pais();
+        pais9.setNombre("Alemania");
+        insertar(pais9);
+
+        Pais pais0 = new Pais();
+        pais0.setNombre("Otro");
+        insertar(pais0);
+
 
 
 

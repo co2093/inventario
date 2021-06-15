@@ -11,6 +11,7 @@ public class MenuPrincipalDocumentos extends AppCompatActivity {
 
     Button menuLibros;
     Button menuTesis;
+    Button menuEditorial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,20 @@ public class MenuPrincipalDocumentos extends AppCompatActivity {
 
         menuLibros = findViewById(R.id.btnMenuLibros);
         menuTesis = findViewById(R.id.btnMenuTesis);
+        menuEditorial = findViewById(R.id.btnMenuEditorial);
 
         menuLibros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MenuLibroActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
+        menuEditorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuEditorialActivity.class);
                 startActivityForResult(intent,0);
             }
         });

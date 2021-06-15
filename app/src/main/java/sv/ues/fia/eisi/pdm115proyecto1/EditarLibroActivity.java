@@ -17,8 +17,8 @@ public class EditarLibroActivity extends AppCompatActivity {
     ImageButton btnAgregar, btnRegresar;
     ControlDB helper;
     EditText editTextIsbn, editTextNombre, editTextEjemplar, editTextEditorial, editTextIdioma;
-    Spinner spinnerAutores, spinnerIdiomas;
-    ArrayAdapter libroArrayAdapter, idiomArrayAdapter;
+    Spinner spinnerAutores, spinnerIdiomas, spinnerEditoriales;
+    ArrayAdapter libroArrayAdapter, idiomArrayAdapter, editorialArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,14 @@ public class EditarLibroActivity extends AppCompatActivity {
         editTextNombre = findViewById(R.id.editTextNombreLibroEdit);
         spinnerAutores = findViewById(R.id.spinnerAutoresLibroEdit);
         editTextEjemplar = findViewById(R.id.editTextAutorEjemplarEdit);
-        editTextEditorial = findViewById(R.id.editTextEditorialEdit);
+       // editTextEditorial = findViewById(R.id.editTextEditorialEdit);
        // editTextIdioma = findViewById(R.id.editTextIdiomaEdit);
         spinnerIdiomas = findViewById(R.id.spinnerIdiomaLibroEdit);
+        spinnerEditoriales = findViewById(R.id.spinnerEditorialEdit);
 
         llenarSpinner(helper);
         llenarSpinner2(helper);
+        llenarSpinner3(helper);
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +55,7 @@ public class EditarLibroActivity extends AppCompatActivity {
     public void actualizarLibro(View v){
 
 
-        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || spinnerIdiomas.getSelectedItem() == null ||editTextEjemplar.getText().toString().isEmpty() || editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
+        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || spinnerIdiomas.getSelectedItem() == null ||editTextEjemplar.getText().toString().isEmpty() || spinnerEditoriales.getSelectedItem() == null || spinnerAutores.getSelectedItem()==null){
             Toast.makeText(EditarLibroActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
@@ -61,7 +63,7 @@ public class EditarLibroActivity extends AppCompatActivity {
             String nombre = editTextNombre.getText().toString();
             Integer autor = Integer.valueOf(spinnerAutores.getSelectedItem().toString());
             Integer ejemplar = Integer.valueOf(editTextEjemplar.getText().toString());
-            String editorial = editTextEditorial.getText().toString();
+            String editorial = spinnerEditoriales.getSelectedItem().toString();
             String idioma = spinnerIdiomas.getSelectedItem().toString();
 
             String regInsertados;
@@ -91,6 +93,11 @@ public class EditarLibroActivity extends AppCompatActivity {
     public void llenarSpinner2(ControlDB helper){
         idiomArrayAdapter= new ArrayAdapter<String>(EditarLibroActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getIdiomas());
         spinnerIdiomas.setAdapter(idiomArrayAdapter);
+    }
+
+    public void llenarSpinner3(ControlDB helper){
+        editorialArrayAdapter= new ArrayAdapter<String>(EditarLibroActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getEditorialNombres());
+        spinnerEditoriales.setAdapter(editorialArrayAdapter);
     }
 
 

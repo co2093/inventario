@@ -64,4 +64,5 @@
     <string name="vacio">Empty</string>
     <string name="completado">Completed</string>
     <string name="noexiste">It does not exist</string>
+    <string name="pais">Country</string>
 </resources>

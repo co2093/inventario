@@ -23,7 +23,6 @@
     <string name="title_activity_editar_actividad" translatable="false">EditarActividadActivity</string>
 
 
-
     <string name="equipo">Equipo</string>
     <string name="usuario">Usuario</string>
     <string name="contrasena">Contraseña</string>
@@ -48,6 +47,7 @@
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="pais">País</string>
 
     <string name="id">ID</string>
     <string name="nombre">Nombre</string>
@@ -102,7 +102,6 @@
     <string name="vacio">Vacio</string>
     <string name="completado">Completado</string>
     <string name="noexiste">No existe</string>
-
 
 
 </resources>

@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pdm115proyecto1">
-        <activity android:name=".ServiciosWebActualizarLibro"></activity>
+        <activity android:name=".MenuEditorialActivity"></activity>
+        <activity android:name=".EditarEditorialActivity" />
+        <activity android:name=".AgregarEditorialActivity" />
+        <activity android:name=".ServiciosWebActualizarLibro" />
         <activity android:name=".ServiciosWebActualizarDocente" />
         <activity android:name=".ServiciosWebActualizarAutor" />
         <activity android:name=".ServiciosWebDocentesActivity" />

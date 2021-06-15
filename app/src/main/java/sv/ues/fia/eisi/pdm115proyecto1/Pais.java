@@ -1,0 +1,21 @@
+package sv.ues.fia.eisi.pdm115proyecto1;
+
+public class Pais {
+
+    private String nombre;
+
+    public Pais() {
+    }
+
+    public Pais(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+}
