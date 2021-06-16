@@ -34,8 +34,10 @@ public class EditarEquipoInformaticoActivity extends AppCompatActivity {
         spinnerCategorias = findViewById(R.id.spinnerCategoriasEquipoEdit);
         editTextModelo = findViewById(R.id.editTextModeloEquipoEdit);
         editTextMarca = findViewById(R.id.editTextMarcaEquipoEdit);
-        editTextEstado = findViewById(R.id.editTextEstadoEdit);
+        editTextEstado = findViewById(R.id.editTextEstadoEquipoEdit);
         editTextFecha = findViewById(R.id.editTextDateEquipoEdit);
+
+        editTextEstado.setText("Disponible");
 
         llenarSpinner(helper);
 

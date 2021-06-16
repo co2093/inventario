@@ -25,6 +25,7 @@ public class ControlDB {
     private static final String [] camposControl = new String[] {"id", "categoria", "existencias", "prestamos"};
 
 
+
     private final Context context;
     private SQLiteDatabase db;
     private DatabaseHelper DBHelper;
@@ -1607,7 +1608,7 @@ public class ControlDB {
 
     public boolean eliminar(Editorial editorial){
         SQLiteDatabase db = DBHelper.getWritableDatabase();
-        String queryString = "DELETE FROM libro WHERE id =" + editorial.getId();
+        String queryString = "DELETE FROM editorial WHERE id =" + editorial.getId();
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()){
@@ -1981,7 +1982,7 @@ public class ControlDB {
 
             case 4:{
                 Categoria categoria = (Categoria) dato;
-                String []id = {String.valueOf(categoria.getNombre_categoria())};
+                String []id = {String.valueOf(categoria.getId_categoria())};
                 abrir();
                 Cursor cursor = db.query("categoria",null,"id_categoria =?",id,null,null,null);
                 if (cursor.moveToFirst()){

@@ -40,7 +40,7 @@ public class CategoriaActivity extends AppCompatActivity {
         editbuscar = findViewById(R.id.editBuscar);
         listadoCategorias = findViewById(R.id.lista_consulta);
         btn_Actualizar = findViewById(R.id.btnEditar);
-        btn_Borrar = findViewById(R.id.btnBorrar);
+//        btn_Borrar = findViewById(R.id.btnBorrar);
         btn_agregar = findViewById(R.id.btnAgregar);
         btn_inicio = findViewById(R.id.imageButtonMenuInicio);
 

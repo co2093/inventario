@@ -78,7 +78,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/apellido"
+        android:text="@string/info"
         android:textColor="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/textInfo4"
         app:layout_constraintStart_toStartOf="parent" />
