@@ -20,9 +20,9 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
 
     ControlDB helper;
     EditText editTextIsbn, editTextNombre, editTextEjemplar, editTextEditorial, editTextIdiomaLibro;
-    Spinner spinnerAutores;
+    Spinner spinnerAutores, spinnerIdiomas, spinnerEditoriales;
     ImageButton regresar;
-    ArrayAdapter libroArrayAdapter;
+    ArrayAdapter libroArrayAdapter, idiomArrayAdapter, editorialArrayAdapter;
 
     private final String urlHostingGratuito = "https://proyecto1pdm115.000webhostapp.com/ws_libro_insert.php";
 
@@ -43,9 +43,14 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
         editTextNombre = findViewById(R.id.editTextNombreLibroSW);
         spinnerAutores = findViewById(R.id.spinnerAutoresLibroSW);
         editTextEjemplar = findViewById(R.id.editTextAutorEjemplarSW);
-        editTextEditorial = findViewById(R.id.editTextEditorialSW);
-        editTextIdiomaLibro = findViewById(R.id.editTextIdiomaLibroSW);
+       // editTextEditorial = findViewById(R.id.editTextEditorialSW);
+    //    editTextIdiomaLibro = findViewById(R.id.editTextIdiomaLibroSW);
+        spinnerIdiomas = findViewById(R.id.spinnerIdiomaLibro);
+        spinnerEditoriales = findViewById(R.id.spinnerEditorial);
+
         llenarSpinner(helper);
+        llenarSpinner2(helper);
+        llenarSpinner3(helper);
 
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +63,7 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
 
     public void insertarLibroSW(View v) {
 
-        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextEjemplar.getText().toString().isEmpty() || editTextIdiomaLibro.getText().toString().isEmpty() ||editTextEditorial.getText().toString().isEmpty() || spinnerAutores.getSelectedItem()==null){
+        if(editTextIsbn.getText().toString().isEmpty() || editTextNombre.getText().toString().isEmpty() || editTextEjemplar.getText().toString().isEmpty() ||spinnerIdiomas.getSelectedItem() == null || spinnerEditoriales.getSelectedItem() == null || spinnerAutores.getSelectedItem()==null){
             Toast.makeText(ServiciosWebLibrosActivity.this, R.string.todos, Toast.LENGTH_LONG).show();
         }else {
 
@@ -66,8 +71,8 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
             String nombre = editTextNombre.getText().toString();
             Integer autor = Integer.valueOf(spinnerAutores.getSelectedItem().toString());
             Integer ejemplar = Integer.valueOf(editTextEjemplar.getText().toString());
-            String editorial = editTextEditorial.getText().toString();
-            String idioma = editTextIdiomaLibro.getText().toString();
+            String editorial = spinnerEditoriales.getSelectedItem().toString();
+            String idioma = spinnerIdiomas.getSelectedItem().toString();
 
             String url = null;
             JSONObject datosNota = new JSONObject();
@@ -88,5 +93,15 @@ public class ServiciosWebLibrosActivity extends AppCompatActivity {
     public void llenarSpinner(ControlDB helper){
         libroArrayAdapter= new ArrayAdapter<Integer>(ServiciosWebLibrosActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getAutoresID());
         spinnerAutores.setAdapter(libroArrayAdapter);
+    }
+
+    public void llenarSpinner2(ControlDB helper){
+        idiomArrayAdapter= new ArrayAdapter<String>(ServiciosWebLibrosActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getIdiomas());
+        spinnerIdiomas.setAdapter(idiomArrayAdapter);
+    }
+
+    public void llenarSpinner3(ControlDB helper){
+        editorialArrayAdapter= new ArrayAdapter<String>(ServiciosWebLibrosActivity.this, android.R.layout.simple_expandable_list_item_1, helper.getEditorialNombres());
+        spinnerEditoriales.setAdapter(editorialArrayAdapter);
     }
 }

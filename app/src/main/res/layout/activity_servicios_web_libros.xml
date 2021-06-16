@@ -17,21 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-    <EditText
-        android:id="@+id/editTextIdiomaLibroSW"
-        android:layout_width="186dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="520dp"
-        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
     <TextView
         android:id="@+id/textagregarCategoria6"
         android:layout_width="wrap_content"
@@ -42,21 +27,6 @@
         android:text="@string/editorial"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-    <EditText
-        android:id="@+id/editTextEditorialSW"
-        android:layout_width="186dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="444dp"
-        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.385"
-        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <TextView
@@ -239,6 +209,27 @@
         app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toEndOf="@+id/textagregarCategoria"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <Spinner
+        android:id="@+id/spinnerEditorial"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="436dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria6"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <Spinner
+        android:id="@+id/spinnerIdiomaLibro"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="516dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toEndOf="@+id/textagregarCategoria3"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
 
     <Spinner
         android:id="@+id/spinnerAutoresLibroSW"
